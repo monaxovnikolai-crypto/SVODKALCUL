@@ -128,15 +128,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Адаптивность */
-        @media (max-width: 800px) {
-            .tabs { flex-wrap: wrap; }
-        }
-    </style>
-
-    <!-- Дополнительные стили для 2-й вкладки (Расчет ЗУ и площадок) -->
-    <style id="styleZU">
-        /* Стили для калькулятора площадок (скопированы из Расчет ЗУ.html) */
+        /* ДВЕ КОЛОНКИ (общий стиль для всех вкладок) */
         .two-columns {
             display: flex;
             flex-wrap: wrap;
@@ -153,6 +145,8 @@
             flex-direction: column;
             gap: 16px;
         }
+
+        /* Карточки параметров */
         .param-card {
             background: #f8f9fa;
             padding: 16px;
@@ -176,10 +170,6 @@
             background: white;
             font-family: inherit;
         }
-        .param-card select:focus, .param-card input:focus {
-            border-color: #27ae60;
-            outline: none;
-        }
         .param-card small {
             display: block;
             margin-top: 8px;
@@ -201,6 +191,8 @@
             color: #2c3e50;
             display: block;
         }
+
+        /* Карточка ЗУ */
         .zu-card {
             background: #f5f9ff;
             border-radius: 20px;
@@ -223,6 +215,8 @@
             color: #5b6e8c;
             margin-top: 5px;
         }
+
+        /* Таблицы результатов */
         .results-container {
             margin-top: 20px;
             clear: both;
@@ -269,6 +263,20 @@
             margin-bottom: 16px;
             text-align: center;
         }
+        .total-card {
+            background: linear-gradient(135deg, #27ae60 0%, #2c3e50 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .total-card .total-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+        }
+
+        /* Toggle switch (зеленый при включении) */
         .toggle-container {
             display: flex;
             justify-content: space-between;
@@ -313,6 +321,8 @@
         .toggle-switch input:checked + .toggle-slider:before {
             transform: translateX(24px);
         }
+
+        /* Сообщения */
         .temp-message {
             padding: 12px;
             border-radius: 12px;
@@ -327,154 +337,202 @@
             margin-top: 16px;
         }
         .button-group .btn { flex: 1; min-width: 120px; }
-    </style>
 
-    <!-- Дополнительные стили для 3-й вкладки (Помещения) -->
-    <style id="styleRooms">
-        .two-columns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
+        /* Специфичные стили для 1-й вкладки (унифицированные) */
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e4e7ec;
         }
-        .left-panel {
-            flex: 1.2;
-            min-width: 340px;
-        }
-        .right-panel {
-            flex: 0.9;
-            min-width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .param-card {
-            background: #f8f9fa;
-            padding: 16px;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #e0e0e0;
-        }
-        .param-card label {
-            display: block;
+        .card-title {
             font-weight: 600;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-size: 15px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: #1f2f3a;
+            border-left: 4px solid #2c7a4d;
+            padding-left: 12px;
         }
-        .param-card select, .param-card input {
+        .split-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .split-col {
+            flex: 1;
+            min-width: 200px;
+            background: #fefefe;
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid #ecf3fa;
+        }
+        .input-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .input-group label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+            color: #2c3e50;
+        }
+        /* Унифицированные поля ввода как на второй вкладке */
+        .input-group input, .input-group select {
             width: 100%;
-            padding: 14px;
+            padding: 12px 14px;
             border: 2px solid #ddd;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 15px;
             background: white;
             font-family: inherit;
+            transition: 0.2s;
         }
-        .double-input {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+        .input-group input:focus, .input-group select:focus {
+            border-color: #27ae60;
+            outline: none;
         }
-        .double-input .input-group {
-            flex: 1;
-            min-width: 140px;
+        .status-badge {
+            background: #f4f9fe;
+            padding: 10px 12px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            margin-top: 14px;
+            text-align: center;
         }
-        .double-input .input-group label {
-            font-size: 13px;
-            margin-bottom: 5px;
-            color: #2c3e50;
-            display: block;
-        }
-        .zu-card {
+        .normative-card {
             background: #f5f9ff;
             border-radius: 20px;
             padding: 20px;
             text-align: center;
             border: 1px solid #dce5f0;
         }
-        .zu-value {
+        .normative-value {
             font-size: 2rem;
             font-weight: 700;
             color: #1f4f2d;
             margin: 8px 0;
         }
-        .results-container {
-            margin-top: 20px;
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 20px 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #27ae60;
-        }
-        .subsection-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin: 15px 0 10px 0;
-            padding-left: 8px;
-            border-left: 4px solid #27ae60;
-        }
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 16px;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .result-table th {
-            background: #34495e;
-            color: white;
-            padding: 12px 8px;
-            font-size: 13px;
-            font-weight: 600;
-            text-align: left;
-        }
-        .result-table td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 14px;
-            color: #2c3e50;
-        }
-        .result-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-        .total-card {
-            background: linear-gradient(135deg, #27ae60 0%, #2c3e50 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .total-card .total-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-        }
-        .temp-message {
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            text-align: center;
-            font-size: 13px;
-        }
-        .button-group {
+        .solutions-container {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 16px;
             margin-top: 16px;
         }
-        .button-group .btn { flex: 1; min-width: 120px; }
-        .hidden { display: none; }
+        .solution-block {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 16px;
+            border-left: 4px solid #3b82f6;
+        }
+        .solution-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .solution-detail {
+            margin-top: 8px;
+            padding: 8px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            font-size: 0.8rem;
+        }
+        .ai-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            border: 3px solid #3b82f6;
+            animation: borderGlow 2s infinite ease-in-out;
+        }
+        @keyframes borderGlow {
+            0% { border-color: #3b82f6; box-shadow: 0 0 0 0 rgba(59,130,246,0.2); }
+            50% { border-color: #a855f7; box-shadow: 0 0 0 6px rgba(168,85,247,0.1); }
+            100% { border-color: #3b82f6; box-shadow: 0 0 0 0 rgba(59,130,246,0.2); }
+        }
+        .ai-button {
+            background: linear-gradient(125deg,#3b82f6,#8b5cf6);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .ai-response {
+            background: #f0f9ff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 16px;
+            border-left: 4px solid #3b82f6;
+            text-align: left;
+            display: none;
+        }
+        .vpn-note {
+            font-size: 0.7rem;
+            color: #ef4444;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #cbd5e1;
+        }
+        .searchable-select {
+            position: relative;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 15px;
+            background: white;
+            font-family: inherit;
+        }
+        .search-input:focus {
+            border-color: #27ae60;
+            outline: none;
+        }
+        .search-dropdown {
+            position: absolute;
+            background: white;
+            border: 1px solid #cfdde6;
+            border-radius: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 20;
+            display: none;
+        }
+        .search-dropdown div {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .search-dropdown div:hover {
+            background: #eef2f5;
+        }
+        .number-field {
+            width: 110px;
+            padding: 8px 10px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        .toggle-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .tabs { flex-wrap: wrap; }
+            .two-columns { flex-direction: column; }
+            .split-row { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -492,97 +550,103 @@
         <div class="tab" data-tab="rooms">🏛️ Расчёт помещений</div>
     </div>
 
-<!-- ========== ВКЛАДКА 1: ОСНОВНОЙ РАСЧЁТ (МНЕНИЕ ИИ) ========== -->
+    <!-- ========== ВКЛАДКА 1: ОСНОВНОЙ РАСЧЁТ (МНЕНИЕ ИИ) ========== -->
     <div id="main-tab" class="tab-content active">
         <div class="two-columns">
             <div class="left-panel">
-                <div class="card" style="background:#ffffff; border-radius:20px; padding:20px; margin-bottom:20px; border:1px solid #e4e7ec;">
-                    <div class="card-title" style="font-weight:600; margin-bottom:16px; border-left:4px solid #2c7a4d; padding-left:12px;">📐 Способ расчёта</div>
-                    <div class="input-group" style="margin-bottom:16px;">
-                        <label style="font-size:0.75rem; display:block; margin-bottom:6px;">Тип ввода</label>
-                        <select id="calcType" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;">
+                <div class="card">
+                    <div class="card-title">📐 Способ расчёта</div>
+                    <div class="input-group">
+                        <label>Тип ввода</label>
+                        <select id="calcType">
                             <option value="area">По площади жилья (м²)</option>
                             <option value="population">По численности населения (чел)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label id="inputLabel" style="font-size:0.75rem; display:block; margin-bottom:6px;">Площадь жилья (м²)</label>
-                        <input type="number" id="mainValue" placeholder="Введите значение" step="1" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;">
+                        <label id="inputLabel">Площадь жилья (м²)</label>
+                        <input type="number" id="mainValue" placeholder="Введите значение" step="1">
                         <div id="hintText" style="font-size:0.7rem; color:#5b6e8c; margin-top:5px;"></div>
                     </div>
                 </div>
 
-                <div class="card" style="background:#ffffff; border-radius:20px; padding:20px; margin-bottom:20px; border:1px solid #e4e7ec;">
-                    <div class="card-title" style="font-weight:600; margin-bottom:16px; border-left:4px solid #2c7a4d; padding-left:12px;">🏙️ Городской округ</div>
-                    <div class="searchable-select" style="position:relative;">
-                        <input type="text" id="citySearch" class="search-input" placeholder="Начните вводить..." style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;">
-                        <div id="cityDropdown" class="search-dropdown" style="position:absolute; background:white; border:1px solid #cfdde6; border-radius:14px; max-height:200px; overflow-y:auto; width:100%; z-index:20; display:none;"></div>
+                <div class="card">
+                    <div class="card-title">🏙️ Городской округ</div>
+                    <div class="searchable-select">
+                        <input type="text" id="citySearch" class="search-input" placeholder="Начните вводить...">
+                        <div id="cityDropdown" class="search-dropdown"></div>
                     </div>
                     <div style="font-size:0.7rem; margin-top:8px; color:#2c7a4d;" id="coeffHint">Коэффициент округа: 1.00 (не выбран)</div>
                 </div>
 
-                <div class="card" style="background:#ffffff; border-radius:20px; padding:20px; margin-bottom:20px; border:1px solid #e4e7ec;">
-                    <div class="card-title" style="font-weight:600; margin-bottom:16px; border-left:4px solid #2c7a4d; padding-left:12px;">🏫 Школы и детские сады</div>
-                    <div class="split-row" style="display:flex; gap:20px; flex-wrap:wrap;">
-                        <div class="split-col" style="flex:1; min-width:200px; background:#fefefe; border-radius:20px; padding:16px; border:1px solid #ecf3fa;">
+                <div class="card">
+                    <div class="card-title">🏫 Школы и детские сады</div>
+                    <div class="split-row">
+                        <div class="split-col">
                             <div style="font-weight:600; margin-bottom:14px;">🏫 Школы <span class="tooltip-icon" data-tooltip="Указываются объекты только в шаговой доступности в соответствии с СанПин">ⓘ</span></div>
-                            <div class="input-group"><label>Мощность (чел)</label><input type="number" id="schoolPlan" placeholder="План" step="1" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;"></div>
-                            <div class="input-group"><label>Факт (чел)</label><input type="number" id="schoolActual" placeholder="Факт" step="1" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;"></div>
-                            <div class="toggle-block" style="display:flex; align-items:center; gap:12px; margin-top:12px;">
-                                <label class="toggle-switch" style="position:relative; display:inline-block; width:46px; height:24px;"><input type="checkbox" id="secondShiftToggle"><span class="slider" style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; border-radius:30px;"></span></label>
+                            <div class="input-group"><label>Мощность (чел)</label><input type="number" id="schoolPlan" placeholder="План" step="1"></div>
+                            <div class="input-group"><label>Факт (чел)</label><input type="number" id="schoolActual" placeholder="Факт" step="1"></div>
+                            <div class="toggle-block">
+                                <label class="toggle-switch"><input type="checkbox" id="secondShiftToggle"><span class="toggle-slider"></span></label>
                                 <span class="toggle-label">🕐 Вторая смена</span>
-                                <input type="number" id="secondShiftNumber" class="number-field" placeholder="Кол-во чел" step="1" value="0" style="display:none; width:100px; padding:6px 8px; border:1px solid #cfdde6; border-radius:12px;">
+                                <input type="number" id="secondShiftNumber" class="number-field" placeholder="Кол-во чел" step="1" value="0" style="display:none;">
                             </div>
-                            <div id="schoolStatus" class="status-badge" style="background:#f4f9fe; padding:10px 12px; border-radius:14px; font-size:0.75rem; margin-top:14px; text-align:center;">⚪ Нет данных</div>
+                            <div id="schoolStatus" class="status-badge">⚪ Нет данных</div>
                         </div>
-                        <div class="split-col" style="flex:1; min-width:200px; background:#fefefe; border-radius:20px; padding:16px; border:1px solid #ecf3fa;">
+                        <div class="split-col">
                             <div style="font-weight:600; margin-bottom:14px;">🏫 Детские сады <span class="tooltip-icon" data-tooltip="Указываются объекты только в шаговой доступности в соответствии с СанПин">ⓘ</span></div>
-                            <div class="input-group"><label>Мощность (чел)</label><input type="number" id="kindergartenPlan" placeholder="План" step="1" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;"></div>
-                            <div class="input-group"><label>Факт (чел)</label><input type="number" id="kindergartenActual" placeholder="Факт" step="1" style="width:100%; padding:10px 12px; border:1px solid #cfdde6; border-radius:14px;"></div>
-                            <div class="toggle-block" style="display:flex; align-items:center; gap:12px; margin-top:12px;">
-                                <label class="toggle-switch" style="position:relative; display:inline-block; width:46px; height:24px;"><input type="checkbox" id="queueToggle"><span class="slider" style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; border-radius:30px;"></span></label>
+                            <div class="input-group"><label>Мощность (чел)</label><input type="number" id="kindergartenPlan" placeholder="План" step="1"></div>
+                            <div class="input-group"><label>Факт (чел)</label><input type="number" id="kindergartenActual" placeholder="Факт" step="1"></div>
+                            <div class="toggle-block">
+                                <label class="toggle-switch"><input type="checkbox" id="queueToggle"><span class="toggle-slider"></span></label>
                                 <span class="toggle-label">👶 Очередность 3–7 лет</span>
-                                <input type="number" id="queueNumber" class="number-field" placeholder="Детей в очереди" step="1" value="0" style="display:none; width:100px; padding:6px 8px; border:1px solid #cfdde6; border-radius:12px;">
+                                <input type="number" id="queueNumber" class="number-field" placeholder="Детей в очереди" step="1" value="0" style="display:none;">
                             </div>
-                            <div id="kindergartenStatus" class="status-badge" style="background:#f4f9fe; padding:10px 12px; border-radius:14px; font-size:0.75rem; margin-top:14px; text-align:center;">⚪ Нет данных</div>
+                            <div id="kindergartenStatus" class="status-badge">⚪ Нет данных</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="right-panel">
-                <div class="normative-card" style="background:#f5f9ff; border-radius:20px; padding:20px; text-align:center; border:1px solid #dce5f0;">
+                <div class="normative-card">
                     <div style="font-weight:600;">📋 Норматив РНГП 713/30</div>
-                    <div>🏫 Школы <span id="schoolRequired" class="normative-value" style="font-size:2rem; font-weight:700; color:#1f4f2d;">0</span> мест</div>
-                    <div>🏫 Сады <span id="kindergartenRequired" class="normative-value" style="font-size:2rem; font-weight:700; color:#1f4f2d;">0</span> мест</div>
+                    <div>🏫 Школы <span id="schoolRequired" class="normative-value">0</span> мест</div>
+                    <div>🏫 Сады <span id="kindergartenRequired" class="normative-value">0</span> мест</div>
                     <div style="font-size:0.7rem;">135 мест/1000 жит · 65 мест/1000 жит<br>× округ (0,85)</div>
                 </div>
-                <button id="generateSolutionsBtn" class="btn btn-primary" style="width:100%; background:#27ae60; color:white; border:none; padding:12px 20px; border-radius:12px; font-weight:600; cursor:pointer;">📋 Сформировать решения</button>
-                <div id="solutionsContainer" class="solutions-container" style="display:none; flex-direction:column; gap:16px; margin-top:16px;">
-                    <div class="solution-block" style="background:#f8fafc; border-radius:16px; padding:16px; border-left:4px solid #3b82f6;">
-                        <div class="solution-title" style="font-weight:700; margin-bottom:12px;">🏫 Решение по школам</div>
+                <button id="generateSolutionsBtn" class="btn btn-primary" style="width:100%;">📋 Сформировать решения</button>
+                <div id="solutionsContainer" class="solutions-container" style="display:none;">
+                    <div class="solution-block">
+                        <div class="solution-title">🏫 Решение по школам</div>
                         <div class="solution-text" id="schoolSolutionText">Введите данные для расчёта</div>
                     </div>
-                    <div class="solution-block" style="background:#f8fafc; border-radius:16px; padding:16px; border-left:4px solid #3b82f6;">
-                        <div class="solution-title" style="font-weight:700; margin-bottom:12px;">🏫 Решение по детским садам</div>
+                    <div class="solution-block">
+                        <div class="solution-title">🏫 Решение по детским садам</div>
                         <div class="solution-text" id="kindergartenSolutionText">Введите данные для расчёта</div>
                     </div>
                 </div>
-                <div class="ai-card" style="background:white; border-radius:24px; padding:20px; text-align:center; border:3px solid #3b82f6;">
-                    <button id="aiOpinionBtn" class="ai-button" style="background:linear-gradient(125deg,#3b82f6,#8b5cf6); color:white; border:none; padding:14px 28px; border-radius:60px; font-weight:700; cursor:pointer;">🧠 Мнение ИИ</button>
-                    <div id="aiResponse" class="ai-response" style="background:#f0f9ff; border-radius:16px; padding:16px; margin-top:16px; border-left:4px solid #3b82f6; display:none;">
+                <div class="ai-card">
+                    <button id="aiOpinionBtn" class="ai-button">🧠 Мнение ИИ</button>
+                    <div id="aiResponse" class="ai-response">
                         <div id="aiText"></div>
-                        <div class="vpn-note" style="font-size:0.7rem; color:#ef4444; margin-top:10px;">⚠️ Мнение ИИ доступно только при включенном VPN</div>
+                        <div class="vpn-note">⚠️ Мнение ИИ доступно только при включенном VPN</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========== ВКЛАДКА 2: РАСЧЁТ ЗУ И ПЛОЩАДОК (Расчет ЗУ.html) ========== -->
+    <!-- ========== ВКЛАДКА 2: РАСЧЁТ ЗУ И ПЛОЩАДОК ========== -->
     <div id="zu-tab" class="tab-content">
-        <!-- Код из Расчет ЗУ.html без изменений -->
         <div class="two-columns">
             <div class="left-panel">
+                <div class="param-card">
+                    <div class="toggle-container" style="justify-content: flex-start; gap: 16px;">
+                        <span class="toggle-label" style="font-weight: 600;">🏷️ Типовой объект</span>
+                        <label class="toggle-switch"><input type="checkbox" id="typicalObjectToggleZU" checked><span class="toggle-slider"></span></label>
+                        <small style="margin-left: auto;">При включении — выбор из типовых мощностей</small>
+                    </div>
+                </div>
                 <div class="param-card">
                     <label>🏢 Тип объекта</label>
                     <select id="objectTypeZU">
@@ -593,11 +657,11 @@
                 </div>
                 <div id="schoolCapacityBlockZU" class="param-card">
                     <label>🏫 Мощность школы (количество мест)</label>
-                    <input type="number" id="schoolCapacityZU" placeholder="Введите количество мест" step="1">
+                    <div id="schoolCapacityControlZU"></div>
                 </div>
                 <div id="kindergartenCapacityBlockZU" class="param-card hidden">
                     <label>🏫 Мощность детского сада (количество мест)</label>
-                    <input type="number" id="kindergartenCapacityZU" placeholder="Введите количество мест" step="1">
+                    <div id="kindergartenCapacityControlZU"></div>
                 </div>
                 <div id="parallelsBlockZU" class="param-card hidden">
                     <label>📚 Количество параллелей (школа)</label>
@@ -645,11 +709,17 @@
         <div id="resultsZU" class="results-container"></div>
     </div>
 
-    <!-- ========== ВКЛАДКА 3: РАСЧЁТ ПОМЕЩЕНИЙ (Помещения.html) ========== -->
+    <!-- ========== ВКЛАДКА 3: РАСЧЁТ ПОМЕЩЕНИЙ ========== -->
     <div id="rooms-tab" class="tab-content">
-        <!-- Код из Помещения.html без изменений -->
         <div class="two-columns">
             <div class="left-panel">
+                <div class="param-card">
+                    <div class="toggle-container" style="justify-content: flex-start; gap: 16px;">
+                        <span class="toggle-label" style="font-weight: 600;">🏷️ Типовой объект</span>
+                        <label class="toggle-switch"><input type="checkbox" id="typicalObjectToggleRooms" checked><span class="toggle-slider"></span></label>
+                        <small style="margin-left: auto;">При включении — выбор из типовых мощностей</small>
+                    </div>
+                </div>
                 <div class="param-card">
                     <label>🏢 Тип объекта</label>
                     <select id="objectTypeRooms">
@@ -660,11 +730,11 @@
                 </div>
                 <div id="schoolCapacityBlockRooms" class="param-card">
                     <label>🏫 Мощность школы (количество мест)</label>
-                    <input type="number" id="schoolCapacityRooms" placeholder="Введите количество мест" step="1">
+                    <div id="schoolCapacityControlRooms"></div>
                 </div>
                 <div id="kindergartenCapacityBlockRooms" class="param-card hidden">
                     <label>🏫 Мощность детского сада (количество мест)</label>
-                    <input type="number" id="kindergartenCapacityRooms" placeholder="Введите количество мест" step="1">
+                    <div id="kindergartenCapacityControlRooms"></div>
                 </div>
                 <div id="schoolChildrenBlockRooms" class="param-card hidden">
                     <label>📚 Количество детей по уровням образования</label>
@@ -675,15 +745,14 @@
                     <small>Наполняемость класса — 25 человек. Количество классов рассчитается автоматически.</small>
                 </div>
                 <div id="groupsBlockRooms" class="param-card hidden">
-                    <label>👶 Дети до 3 лет</label>
+                    <label>👶 Детский сад - групповые ячейки</label>
                     <div class="double-input" style="margin-bottom:12px;">
-                        <div class="input-group"><label>Количество детей</label><input type="number" id="childrenUnder3Rooms" placeholder="детей" step="1" value="0"></div>
-                        <div class="input-group"><label>Количество групп</label><input type="number" id="groupsUnder3Rooms" placeholder="групп" step="1" value="0"></div>
+                        <div class="input-group"><label>Группы до 3 лет</label><input type="number" id="groupsUnder3Rooms" placeholder="Кол-во групп" step="1" value="0"></div>
+                        <div class="input-group"><label>Количество детей (до 3 лет)</label><input type="number" id="childrenUnder3Rooms" placeholder="Всего детей" step="1" value="0"></div>
                     </div>
-                    <label style="margin-top:12px;">👧 Дети от 3 до 7 лет</label>
                     <div class="double-input">
-                        <div class="input-group"><label>Количество детей</label><input type="number" id="childrenOver3Rooms" placeholder="детей" step="1" value="0"></div>
-                        <div class="input-group"><label>Количество групп</label><input type="number" id="groupsOver3Rooms" placeholder="групп" step="1" value="0"></div>
+                        <div class="input-group"><label>Группы от 3 до 7 лет</label><input type="number" id="groupsOver3Rooms" placeholder="Кол-во групп" step="1" value="0"></div>
+                        <div class="input-group"><label>Количество детей (от 3 до 7 лет)</label><input type="number" id="childrenOver3Rooms" placeholder="Всего детей" step="1" value="0"></div>
                     </div>
                     <small>Игровая: норматив на ребёнка + 2 м² на группу (мебель). Спальня: только норматив на ребёнка.</small>
                 </div>
@@ -705,9 +774,9 @@
     </div>
 </div>
 
-<!-- ========== ОБЩИЕ СКРИПТЫ ДЛЯ ВКЛАДОК ========== -->
+<!-- ========== СКРИПТЫ ========== -->
 <script>
-    // Переключение вкладок
+    // ==================== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ====================
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
             const target = tab.getAttribute('data-tab');
@@ -719,447 +788,713 @@
     });
 </script>
 
-<!-- ========== СКРИПТ 1: ОСНОВНОЙ РАСЧЁТ (мнениеИИ_Правки_РНГП_8.1.html) ========== -->
+<!-- СКРИПТ 1: ОСНОВНОЙ РАСЧЁТ (МНЕНИЕ ИИ) -->
 <script>
-    // ---------- ГОРОДА ----------
-    const cities = [
-        "Ленинский","Одинцовский","Красногорск","Балашиха","Мытищи","Наро-Фоминск","Химки","Люберцы","Щелково","Домодедово",
-        "Котельники","Пушкинский","Чехов","Раменский","Истра","Долгопрудный","Реутов","Подольск","Лосино-Петровский","Зарайск",
-        "Лобня","Солнечногорск","Дмитровский","Ступино","Богородский","Клин","Сергиево-Посадский","Рузский","Дубна","Лыткарино",
-        "Бронницы","Королев","Павлово-Посадский","Воскресенск","Фрязино","Жуковский","Электросталь","Орехово-Зуево","Серпухов",
-        "Коломна","Талдомский","Можайский","Луховицы","Черноголовка","Волоколамский","Кашира","Егорьевск","Серебряные Пруды",
-        "Шатура","Шаховская","Лотошино"
-    ];
-    let selectedCity = "";
-    let districtCoeff = 1.0;
-    const SCHOOL_RATE = 0.135;
-    const KINDER_RATE = 0.065;
-    const PROXY_URL = 'https://gemini-proxy.monaxovnikolai-31d.workers.dev';
+    (function() {
+        // ---------- ГОРОДА ----------
+        const cities = [
+            "Ленинский","Одинцовский","Красногорск","Балашиха","Мытищи","Наро-Фоминск","Химки","Люберцы","Щелково","Домодедово",
+            "Котельники","Пушкинский","Чехов","Раменский","Истра","Долгопрудный","Реутов","Подольск","Лосино-Петровский","Зарайск",
+            "Лобня","Солнечногорск","Дмитровский","Ступино","Богородский","Клин","Сергиево-Посадский","Рузский","Дубна","Лыткарино",
+            "Бронницы","Королев","Павлово-Посадский","Воскресенск","Фрязино","Жуковский","Электросталь","Орехово-Зуево","Серпухов",
+            "Коломна","Талдомский","Можайский","Луховицы","Черноголовка","Волоколамский","Кашира","Егорьевск","Серебряные Пруды",
+            "Шатура","Шаховская","Лотошино"
+        ];
+        let selectedCity = "";
+        let districtCoeff = 1.0;
+        const SCHOOL_RATE = 0.135;
+        const KINDER_RATE = 0.065;
+        const PROXY_URL = 'https://gemini-proxy.monaxovnikolai-31d.workers.dev';
 
-    // DOM элементы
-    const calcType = document.getElementById('calcType');
-    const mainValue = document.getElementById('mainValue');
-    const hintText = document.getElementById('hintText');
-    const inputLabel = document.getElementById('inputLabel');
-    const schoolPlan = document.getElementById('schoolPlan');
-    const schoolActual = document.getElementById('schoolActual');
-    const secondShiftToggle = document.getElementById('secondShiftToggle');
-    const secondShiftNumber = document.getElementById('secondShiftNumber');
-    const schoolStatus = document.getElementById('schoolStatus');
-    const kinderPlan = document.getElementById('kindergartenPlan');
-    const kinderActual = document.getElementById('kindergartenActual');
-    const queueToggle = document.getElementById('queueToggle');
-    const queueNumber = document.getElementById('queueNumber');
-    const kinderStatus = document.getElementById('kindergartenStatus');
-    const schoolRequiredSpan = document.getElementById('schoolRequired');
-    const kinderRequiredSpan = document.getElementById('kindergartenRequired');
-    const schoolSolutionText = document.getElementById('schoolSolutionText');
-    const kindergartenSolutionText = document.getElementById('kindergartenSolutionText');
-    const citySearchInput = document.getElementById('citySearch');
-    const cityDropdown = document.getElementById('cityDropdown');
-    const aiOpinionBtn = document.getElementById('aiOpinionBtn');
-    const aiResponse = document.getElementById('aiResponse');
-    const aiText = document.getElementById('aiText');
-    const generateSolutionsBtn = document.getElementById('generateSolutionsBtn');
-    const solutionsContainer = document.getElementById('solutionsContainer');
+        // DOM элементы
+        const calcType = document.getElementById('calcType');
+        const mainValue = document.getElementById('mainValue');
+        const hintText = document.getElementById('hintText');
+        const inputLabel = document.getElementById('inputLabel');
+        const schoolPlan = document.getElementById('schoolPlan');
+        const schoolActual = document.getElementById('schoolActual');
+        const secondShiftToggle = document.getElementById('secondShiftToggle');
+        const secondShiftNumber = document.getElementById('secondShiftNumber');
+        const schoolStatus = document.getElementById('schoolStatus');
+        const kinderPlan = document.getElementById('kindergartenPlan');
+        const kinderActual = document.getElementById('kindergartenActual');
+        const queueToggle = document.getElementById('queueToggle');
+        const queueNumber = document.getElementById('queueNumber');
+        const kinderStatus = document.getElementById('kindergartenStatus');
+        const schoolRequiredSpan = document.getElementById('schoolRequired');
+        const kinderRequiredSpan = document.getElementById('kindergartenRequired');
+        const schoolSolutionText = document.getElementById('schoolSolutionText');
+        const kindergartenSolutionText = document.getElementById('kindergartenSolutionText');
+        const citySearchInput = document.getElementById('citySearch');
+        const cityDropdown = document.getElementById('cityDropdown');
+        const aiOpinionBtn = document.getElementById('aiOpinionBtn');
+        const aiResponse = document.getElementById('aiResponse');
+        const aiText = document.getElementById('aiText');
+        const generateSolutionsBtn = document.getElementById('generateSolutionsBtn');
+        const solutionsContainer = document.getElementById('solutionsContainer');
 
-    // Функции основного расчёта
-    function renderCities(filter = "") {
-        const filtered = cities.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
-        if (!filtered.length) { cityDropdown.innerHTML = "<div style='padding:8px'>Нет совпадений</div>"; cityDropdown.style.display = "block"; return; }
-        cityDropdown.innerHTML = filtered.map(c => `<div data-city="${c}">${c}</div>`).join('');
-        cityDropdown.style.display = "block";
-        document.querySelectorAll('[data-city]').forEach(el => {
-            el.addEventListener('click', (e) => {
-                const city = el.getAttribute('data-city');
-                citySearchInput.value = city;
-                selectedCity = city;
-                cityDropdown.style.display = "none";
-                districtCoeff = 0.85;  // Коэффициент для городского округа
-                document.getElementById('coeffHint').innerHTML = `Коэффициент округа: ${districtCoeff.toFixed(2)} (применяется)`;
-                recalcMain();
+        function renderCities(filter = "") {
+            const filtered = cities.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+            if (!filtered.length) { cityDropdown.innerHTML = "<div style='padding:8px'>Нет совпадений</div>"; cityDropdown.style.display = "block"; return; }
+            cityDropdown.innerHTML = filtered.map(c => `<div data-city="${c}">${c}</div>`).join('');
+            cityDropdown.style.display = "block";
+            document.querySelectorAll('[data-city]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    const city = el.getAttribute('data-city');
+                    citySearchInput.value = city;
+                    selectedCity = city;
+                    cityDropdown.style.display = "none";
+                    districtCoeff = 0.85;
+                    document.getElementById('coeffHint').innerHTML = `Коэффициент округа: ${districtCoeff.toFixed(2)} (применяется)`;
+                    recalcMain();
+                });
             });
-        });
-    }
-    
-    // Обработчик для ручного удаления текста из поля
-    citySearchInput.addEventListener('input', (e) => {
-        renderCities(e.target.value);
-        // Если поле стало пустым — сбрасываем коэффициент
-        if (citySearchInput.value.trim() === "") {
-            districtCoeff = 1.0;
-            selectedCity = "";
-            document.getElementById('coeffHint').innerHTML = `Коэффициент округа: 1.00 (не выбран)`;
-            recalcMain();
         }
-    });
-    
-    // Клик вне дропдауна — закрываем, но коэффициент не сбрасываем (только если поле пустое)
-    document.addEventListener('click', (e) => { 
-        if (!citySearchInput.contains(e.target) && !cityDropdown.contains(e.target)) {
-            cityDropdown.style.display = "none";
-            // Если поле пустое и не выбран город — сбрасываем коэффициент
-            if (citySearchInput.value.trim() === "" && selectedCity === "") {
+        citySearchInput.addEventListener('input', (e) => {
+            renderCities(e.target.value);
+            if (citySearchInput.value.trim() === "") {
                 districtCoeff = 1.0;
+                selectedCity = "";
                 document.getElementById('coeffHint').innerHTML = `Коэффициент округа: 1.00 (не выбран)`;
                 recalcMain();
             }
-        }
-    });
-    
-    function getPopulation() { let val = parseFloat(mainValue.value) || 0; return calcType.value === 'area' ? Math.floor(val / 28) : Math.floor(val); }
-    function updateHint() {
-        let val = parseFloat(mainValue.value) || 0;
-        if (calcType.value === 'area') { hintText.innerText = `👥 Соответствует населению: ${Math.floor(val/28)} чел.`; inputLabel.innerText = 'Площадь жилья (м²)'; }
-        else { hintText.innerText = `🏘️ Соответствует площади жилья: ${Math.floor(val*28)} м²`; inputLabel.innerText = 'Численность населения (чел)'; }
-    }
-    function updateSchoolStatus() {
-        let plan = parseFloat(schoolPlan.value) || 0, fact = parseFloat(schoolActual.value) || 0, hasSecond = secondShiftToggle.checked;
-        if (plan <= 0) { schoolStatus.innerHTML = "⚪ Нет данных"; return; }
-        let percent = (fact / plan) * 100, deficit = fact - plan;
-        if (hasSecond) schoolStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • вторая смена`;
-        else if (percent > 120) schoolStatus.innerHTML = `⚠️ Перегрузка +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% (но без 2-й смены)`;
-        else if (percent < 100) schoolStatus.innerHTML = `<span style="color: red;">⚠️ Недозагружена</span> • загрузка ${percent.toFixed(1)}%`;
-        else schoolStatus.innerHTML = `✅ Сбалансировано • загрузка ${percent.toFixed(1)}%`;
-    }
-    function updateKindergartenStatus() {
-        let plan = parseFloat(kinderPlan.value) || 0, fact = parseFloat(kinderActual.value) || 0, hasQueue = queueToggle.checked, queueCount = parseFloat(queueNumber.value) || 0;
-        if (plan <= 0) { kinderStatus.innerHTML = "⚪ Нет данных"; return; }
-        let percent = (fact / plan) * 100, deficit = fact - plan;
-        if (hasQueue && queueCount > 50) kinderStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • очередь ${queueCount} детей (критично)`;
-        else if (hasQueue) kinderStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • очередь ${queueCount} детей`;
-        else if (percent > 140) kinderStatus.innerHTML = `⚠️ Перегрузка +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% (без очереди)`;
-        else if (percent < 100) kinderStatus.innerHTML = `<span style="color: red;">⚠️ Недозагружена</span> • загрузка ${percent.toFixed(1)}%`;
-        else kinderStatus.innerHTML = `✅ Сбалансировано • загрузка ${percent.toFixed(1)}%`;
-    }
-    function recalcMain() { 
-        const population = getPopulation(); 
-        updateHint(); 
-        schoolRequiredSpan.innerText = Math.round(population * SCHOOL_RATE * districtCoeff); 
-        kinderRequiredSpan.innerText = Math.round(population * KINDER_RATE * districtCoeff); 
-        updateSchoolStatus(); 
-        updateKindergartenStatus(); 
-    }
-    
-    // ФОРМИРОВАНИЕ РЕШЕНИЙ (исправленная логика)
-    function generateSolutions() {
-        const schoolNeed = Math.round(getPopulation() * SCHOOL_RATE * districtCoeff);
-        const kinderNeed = Math.round(getPopulation() * KINDER_RATE * districtCoeff);
-        
-        const schoolPlanVal = parseFloat(schoolPlan.value) || 0;
-        const schoolActualVal = parseFloat(schoolActual.value) || 0;
-        const kinderPlanVal = parseFloat(kinderPlan.value) || 0;
-        const kinderActualVal = parseFloat(kinderActual.value) || 0;
-        const hasSecond = secondShiftToggle.checked;
-        const hasQueue = queueToggle.checked;
-        
-        let schoolCanTake = 0;
-        if (schoolPlanVal > 0 && !hasSecond) {
-            let maxGoodLoad = 120;
-            let currentLoadPercent = (schoolActualVal / schoolPlanVal) * 100;
-            if (currentLoadPercent < maxGoodLoad) {
-                schoolCanTake = Math.floor(schoolPlanVal * (maxGoodLoad / 100) - schoolActualVal);
-                if (schoolCanTake < 0) schoolCanTake = 0;
+        });
+        document.addEventListener('click', (e) => {
+            if (!citySearchInput.contains(e.target) && !cityDropdown.contains(e.target)) {
+                cityDropdown.style.display = "none";
+                if (citySearchInput.value.trim() === "" && selectedCity === "") {
+                    districtCoeff = 1.0;
+                    document.getElementById('coeffHint').innerHTML = `Коэффициент округа: 1.00 (не выбран)`;
+                    recalcMain();
+                }
             }
+        });
+        function getPopulation() { let val = parseFloat(mainValue.value) || 0; return calcType.value === 'area' ? Math.floor(val / 28) : Math.floor(val); }
+        function updateHint() {
+            let val = parseFloat(mainValue.value) || 0;
+            if (calcType.value === 'area') { hintText.innerText = `👥 Соответствует населению: ${Math.floor(val/28)} чел.`; inputLabel.innerText = 'Площадь жилья (м²)'; }
+            else { hintText.innerText = `🏘️ Соответствует площади жилья: ${Math.floor(val*28)} м²`; inputLabel.innerText = 'Численность населения (чел)'; }
         }
-        
-        let kinderCanTake = 0;
-        if (kinderPlanVal > 0 && !hasQueue) {
-            let maxGoodLoad = 140;
-            let currentLoadPercent = (kinderActualVal / kinderPlanVal) * 100;
-            if (currentLoadPercent < maxGoodLoad) {
-                kinderCanTake = Math.floor(kinderPlanVal * (maxGoodLoad / 100) - kinderActualVal);
-                if (kinderCanTake < 0) kinderCanTake = 0;
+        function updateSchoolStatus() {
+            let plan = parseFloat(schoolPlan.value) || 0, fact = parseFloat(schoolActual.value) || 0, hasSecond = secondShiftToggle.checked;
+            if (plan <= 0) { schoolStatus.innerHTML = "⚪ Нет данных"; return; }
+            let percent = (fact / plan) * 100, deficit = fact - plan;
+            if (hasSecond) schoolStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • вторая смена`;
+            else if (percent > 120) schoolStatus.innerHTML = `⚠️ Перегрузка +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% (но без 2-й смены)`;
+            else if (percent < 100) schoolStatus.innerHTML = `<span style="color: red;">⚠️ Недозагружена</span> • загрузка ${percent.toFixed(1)}%`;
+            else schoolStatus.innerHTML = `✅ Сбалансировано • загрузка ${percent.toFixed(1)}%`;
+        }
+        function updateKindergartenStatus() {
+            let plan = parseFloat(kinderPlan.value) || 0, fact = parseFloat(kinderActual.value) || 0, hasQueue = queueToggle.checked, queueCount = parseFloat(queueNumber.value) || 0;
+            if (plan <= 0) { kinderStatus.innerHTML = "⚪ Нет данных"; return; }
+            let percent = (fact / plan) * 100, deficit = fact - plan;
+            if (hasQueue && queueCount > 50) kinderStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • очередь ${queueCount} детей (критично)`;
+            else if (hasQueue) kinderStatus.innerHTML = `⚠️ Дефицит +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% • очередь ${queueCount} детей`;
+            else if (percent > 140) kinderStatus.innerHTML = `⚠️ Перегрузка +${Math.abs(deficit)} мест • загрузка ${percent.toFixed(1)}% (без очереди)`;
+            else if (percent < 100) kinderStatus.innerHTML = `<span style="color: red;">⚠️ Недозагружена</span> • загрузка ${percent.toFixed(1)}%`;
+            else kinderStatus.innerHTML = `✅ Сбалансировано • загрузка ${percent.toFixed(1)}%`;
+        }
+        function recalcMain() { const population = getPopulation(); updateHint(); schoolRequiredSpan.innerText = Math.round(population * SCHOOL_RATE * districtCoeff); kinderRequiredSpan.innerText = Math.round(population * KINDER_RATE * districtCoeff); updateSchoolStatus(); updateKindergartenStatus(); }
+        function generateSolutions() {
+            const schoolNeed = Math.round(getPopulation() * SCHOOL_RATE * districtCoeff);
+            const kinderNeed = Math.round(getPopulation() * KINDER_RATE * districtCoeff);
+            const schoolPlanVal = parseFloat(schoolPlan.value)||0;
+            const schoolActualVal = parseFloat(schoolActual.value)||0;
+            const kinderPlanVal = parseFloat(kinderPlan.value)||0;
+            const kinderActualVal = parseFloat(kinderActual.value)||0;
+            const hasSecond = secondShiftToggle.checked;
+            const hasQueue = queueToggle.checked;
+            let schoolCanTake=0;
+            if(schoolPlanVal>0 && !hasSecond){
+                let maxGoodLoad=120;
+                let currentLoadPercent=(schoolActualVal/schoolPlanVal)*100;
+                if(currentLoadPercent<maxGoodLoad) schoolCanTake=Math.floor(schoolPlanVal*(maxGoodLoad/100)-schoolActualVal);
+                if(schoolCanTake<0) schoolCanTake=0;
             }
-        }
-        
-        const schoolNeedAfterExisting = Math.max(0, schoolNeed - schoolCanTake);
-        const kinderNeedAfterExisting = Math.max(0, kinderNeed - kinderCanTake);
-        
-        // ---- ЛОГИКА ПО ШКОЛАМ ----
-        let schoolReserve = false;
-        let schoolReserveArea = 0;
-        if (schoolCanTake > 0 && schoolNeedAfterExisting > 0 && schoolNeedAfterExisting >= 200) {
-            schoolReserve = true;
-            schoolReserveArea = (schoolNeedAfterExisting * 31) / 10000;
-        }
-        
-        let schoolHtml = `<strong>Требуется обеспечить ${schoolNeed} мест</strong><br>`;
-        if (schoolCanTake > 0) {
-            schoolHtml += `<span style="color: #27ae60;">✅ В существующую школу можно отправить до ${schoolCanTake} детей</span><br>`;
-        }
-        if (schoolNeedAfterExisting > 0) {
-            schoolHtml += `<br><div class="solution-detail">
-                <strong>🏗️ Строительство школы застройщиком на ${schoolNeedAfterExisting} мест</strong><br>
-                📊 Финансирование разницы по РНГП - 0 мест<br>`;
-            if (schoolReserve) {
-                schoolHtml += `🏞️ Резерв ЗУ на разницу по РНГП – ${schoolReserveArea.toFixed(3)} га (так как строится не на полную мощность, остаток ≥200 мест)`;
-            } else {
-                schoolHtml += `🏞️ Резерв ЗУ не требуется (строительство полной мощности либо остаток <200 мест)`;
+            let kinderCanTake=0;
+            if(kinderPlanVal>0 && !hasQueue){
+                let maxGoodLoad=140;
+                let currentLoadPercent=(kinderActualVal/kinderPlanVal)*100;
+                if(currentLoadPercent<maxGoodLoad) kinderCanTake=Math.floor(kinderPlanVal*(maxGoodLoad/100)-kinderActualVal);
+                if(kinderCanTake<0) kinderCanTake=0;
             }
-            schoolHtml += `</div>`;
-        } else {
-            schoolHtml += `<br><div class="solution-detail">✅ Вся потребность покрывается существующей школой, строительство не требуется</div>`;
-        }
-        schoolSolutionText.innerHTML = schoolHtml;
-        
-        // ---- ЛОГИКА ПО САДАМ (резерв при финансировании) ----
-        let kinderBuild = Math.min(kinderNeedAfterExisting, 120);
-        let kinderFinance = Math.max(0, kinderNeedAfterExisting - 120);
-        let kinderReserve = false;
-        let kinderReserveArea = 0;
-        
-        if (kinderFinance > 0 && kinderBuild > 0) {
-            kinderReserve = true;
-            kinderReserveArea = (kinderNeedAfterExisting * 38) / 10000;
-        }
-        
-        let kinderHtml = `<strong>Требуется обеспечить ${kinderNeed} мест</strong><br>`;
-        if (kinderCanTake > 0) {
-            kinderHtml += `<span style="color: #27ae60;">✅ В существующий сад можно отправить до ${kinderCanTake} детей</span><br>`;
-        }
-        if (kinderNeedAfterExisting > 0) {
-            kinderHtml += `<br><div class="solution-detail">
-                <strong>🏗️ Строительство сада застройщиком на ${kinderBuild} мест</strong><br>
-                📊 Финансирование разницы по РНГП - ${kinderFinance} мест<br>`;
-            if (kinderReserve) {
-                kinderHtml += `🏞️ Резерв ЗУ на разницу по РНГП – ${kinderReserveArea.toFixed(3)} га (при финансировании земля резервируется)`;
-            } else {
-                kinderHtml += `🏞️ Резерв ЗУ не требуется (финансирование отсутствует)`;
+            const schoolNeedAfterExisting = Math.max(0, schoolNeed - schoolCanTake);
+            const kinderNeedAfterExisting = Math.max(0, kinderNeed - kinderCanTake);
+            let schoolReserve=false, schoolReserveArea=0;
+            if(schoolCanTake>0 && schoolNeedAfterExisting>0 && schoolNeedAfterExisting>=200){
+                schoolReserve=true;
+                schoolReserveArea=(schoolNeedAfterExisting*31)/10000;
             }
-            kinderHtml += `</div>`;
-        } else {
-            kinderHtml += `<br><div class="solution-detail">✅ Вся потребность покрывается существующим садом, строительство не требуется</div>`;
-        }
-        kindergartenSolutionText.innerHTML = kinderHtml;
-        
-        solutionsContainer.style.display = 'flex';
-    }
-    
-    generateSolutionsBtn.addEventListener('click', generateSolutions);
-    
-    // МНЕНИЕ ИИ
-    async function getAIOpinion() {
-        const population = getPopulation();
-        const schoolNeed = Math.round(population * SCHOOL_RATE * districtCoeff);
-        const kinderNeed = Math.round(population * KINDER_RATE * districtCoeff);
-        const schoolPlanVal = parseFloat(schoolPlan.value)||0;
-        const schoolActualVal = parseFloat(schoolActual.value)||0;
-        const kinderPlanVal = parseFloat(kinderPlan.value)||0;
-        const kinderActualVal = parseFloat(kinderActual.value)||0;
-        const hasSecond = secondShiftToggle.checked;
-        const hasQueue = queueToggle.checked;
-        const queueCount = parseFloat(queueNumber.value)||0;
-        const selectedDistrict = citySearchInput.value || "не выбран";
-        const schoolLoad = schoolPlanVal>0?(schoolActualVal/schoolPlanVal)*100:0;
-        const kinderLoad = kinderPlanVal>0?(kinderActualVal/kinderPlanVal)*100:0;
-        
-        let schoolCanTake = 0;
-        if (schoolPlanVal > 0 && !hasSecond) {
-            let maxGoodLoad = 120;
-            let currentLoadPercent = (schoolActualVal / schoolPlanVal) * 100;
-            if (currentLoadPercent < maxGoodLoad) {
-                schoolCanTake = Math.floor(schoolPlanVal * (maxGoodLoad / 100) - schoolActualVal);
-                if (schoolCanTake < 0) schoolCanTake = 0;
+            let schoolHtml = `<strong>Требуется обеспечить ${schoolNeed} мест</strong><br>`;
+            if(schoolCanTake>0) schoolHtml+=`<span style="color:#27ae60;">✅ В существующую школу можно отправить до ${schoolCanTake} детей</span><br>`;
+            if(schoolNeedAfterExisting>0){
+                schoolHtml+=`<br><div class="solution-detail"><strong>🏗️ Строительство школы застройщиком на ${schoolNeedAfterExisting} мест</strong><br>📊 Финансирование разницы по РНГП - 0 мест<br>`;
+                if(schoolReserve) schoolHtml+=`🏞️ Резерв ЗУ на разницу по РНГП – ${schoolReserveArea.toFixed(3)} га (так как строится не на полную мощность, остаток ≥200 мест)`;
+                else schoolHtml+=`🏞️ Резерв ЗУ не требуется (строительство полной мощности либо остаток <200 мест)`;
+                schoolHtml+=`</div>`;
+            } else schoolHtml+=`<br><div class="solution-detail">✅ Вся потребность покрывается существующей школой, строительство не требуется</div>`;
+            schoolSolutionText.innerHTML = schoolHtml;
+            let kinderBuild = Math.min(kinderNeedAfterExisting,120);
+            let kinderFinance = Math.max(0, kinderNeedAfterExisting-120);
+            let kinderReserve=false, kinderReserveArea=0;
+            if(kinderFinance>0 && kinderBuild>0){
+                kinderReserve=true;
+                kinderReserveArea=(kinderNeedAfterExisting*38)/10000;
             }
+            let kinderHtml = `<strong>Требуется обеспечить ${kinderNeed} мест</strong><br>`;
+            if(kinderCanTake>0) kinderHtml+=`<span style="color:#27ae60;">✅ В существующий сад можно отправить до ${kinderCanTake} детей</span><br>`;
+            if(kinderNeedAfterExisting>0){
+                kinderHtml+=`<br><div class="solution-detail"><strong>🏗️ Строительство сада застройщиком на ${kinderBuild} мест</strong><br>📊 Финансирование разницы по РНГП - ${kinderFinance} мест<br>`;
+                if(kinderReserve) kinderHtml+=`🏞️ Резерв ЗУ на разницу по РНГП – ${kinderReserveArea.toFixed(3)} га (при финансировании земля резервируется)`;
+                else kinderHtml+=`🏞️ Резерв ЗУ не требуется (финансирование отсутствует)`;
+                kinderHtml+=`</div>`;
+            } else kinderHtml+=`<br><div class="solution-detail">✅ Вся потребность покрывается существующим садом, строительство не требуется</div>`;
+            kindergartenSolutionText.innerHTML = kinderHtml;
+            solutionsContainer.style.display = 'flex';
         }
-        
-        let kinderCanTake = 0;
-        if (kinderPlanVal > 0 && !hasQueue) {
-            let maxGoodLoad = 140;
-            let currentLoadPercent = (kinderActualVal / kinderPlanVal) * 100;
-            if (currentLoadPercent < maxGoodLoad) {
-                kinderCanTake = Math.floor(kinderPlanVal * (maxGoodLoad / 100) - kinderActualVal);
-                if (kinderCanTake < 0) kinderCanTake = 0;
+        generateSolutionsBtn.addEventListener('click', generateSolutions);
+        async function getAIOpinion() {
+            const population = getPopulation();
+            const schoolNeed = Math.round(population * SCHOOL_RATE * districtCoeff);
+            const kinderNeed = Math.round(population * KINDER_RATE * districtCoeff);
+            const schoolPlanVal = parseFloat(schoolPlan.value)||0;
+            const schoolActualVal = parseFloat(schoolActual.value)||0;
+            const kinderPlanVal = parseFloat(kinderPlan.value)||0;
+            const kinderActualVal = parseFloat(kinderActual.value)||0;
+            const hasSecond = secondShiftToggle.checked;
+            const hasQueue = queueToggle.checked;
+            const queueCount = parseFloat(queueNumber.value)||0;
+            const selectedDistrict = citySearchInput.value || "не выбран";
+            const schoolLoad = schoolPlanVal>0?(schoolActualVal/schoolPlanVal)*100:0;
+            const kinderLoad = kinderPlanVal>0?(kinderActualVal/kinderPlanVal)*100:0;
+            let schoolCanTake=0;
+            if(schoolPlanVal>0 && !hasSecond){
+                let maxGoodLoad=120;
+                let currentLoadPercent=(schoolActualVal/schoolPlanVal)*100;
+                if(currentLoadPercent<maxGoodLoad) schoolCanTake=Math.floor(schoolPlanVal*(maxGoodLoad/100)-schoolActualVal);
+                if(schoolCanTake<0) schoolCanTake=0;
             }
-        }
-        
-        const schoolRemain = Math.max(0, schoolNeed - schoolCanTake);
-        const kinderRemain = Math.max(0, kinderNeed - kinderCanTake);
-        
-        const schoolReserveNeeded = (schoolRemain > 0 && schoolCanTake > 0 && schoolRemain >= 200);
-        const kinderReserveNeeded = (kinderRemain > 120);
-        
-        const prompt = `Ты эксперт по градостроительству. Отвечай ТОЛЬКО по-русски. 4-5 предложений.
-
-Правила:
-- Школа: резерв земли только если остаток необеспеченных мест >=200 И при этом часть детей отправляем в существующую школу (финансирование). Если строим школу полностью на весь остаток — резерв не нужен.
-- Сад: строится до 120 мест. Если остаток больше 120 — часть детей идёт в существующий сад (финансирование). В этом случае резерв земли нужен ВСЕГДА, независимо от количества мест.
-- Школы: вторая смена — плохо, загрузка до 120% — норма.
-- Сады: загрузка до 140% — норма, очередь более 50 детей — плохо.
-
-Данные для нового ЖК:
-- Нужно построить: школа ${schoolNeed} мест, сад ${kinderNeed} мест.
-- Существующая школа: мощность ${schoolPlanVal}, факт ${schoolActualVal} (загрузка ${schoolLoad.toFixed(0)}%), вторая смена ${hasSecond ? "есть" : "нет"}. Можно принять дополнительно ${Math.max(0, schoolCanTake)} детей.
-- Существующий сад: мощность ${kinderPlanVal}, факт ${kinderActualVal} (загрузка ${kinderLoad.toFixed(0)}%), очередь ${hasQueue ? queueCount : 0} детей. Можно принять дополнительно ${Math.max(0, kinderCanTake)} детей.
-- Остаток после существующих: школа ${schoolRemain} мест, сад ${kinderRemain} мест.
-- Резерв земли нужен: школа ${schoolReserveNeeded ? "ДА (остаток ≥200 и строится не на полную мощность)" : "НЕТ"}, сад ${kinderReserveNeeded ? "ДА (остаток >120, берётся финансирование)" : "НЕТ"}.
-
-Оцени ситуацию и дай чёткую рекомендацию: что строить, что финансировать, нужен ли резерв земли.`;
-
-        aiText.innerHTML = "⏳ Анализирую данные...";
-        aiResponse.style.display = "block";
-
-        try {
-            const response = await fetch(PROXY_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: prompt })
-            });
-            const data = await response.json();
-            if (data.reply) {
-                aiText.innerHTML = data.reply;
-            } else if (data.error) {
-                aiText.innerHTML = `❌ Ошибка: ${data.error}`;
-            } else {
-                aiText.innerHTML = `❌ Не удалось получить ответ от ИИ.`;
+            let kinderCanTake=0;
+            if(kinderPlanVal>0 && !hasQueue){
+                let maxGoodLoad=140;
+                let currentLoadPercent=(kinderActualVal/kinderPlanVal)*100;
+                if(currentLoadPercent<maxGoodLoad) kinderCanTake=Math.floor(kinderPlanVal*(maxGoodLoad/100)-kinderActualVal);
+                if(kinderCanTake<0) kinderCanTake=0;
             }
-        } catch (err) {
-            aiText.innerHTML = `❌ Ошибка соединения: ${err.message}. Проверьте VPN.`;
+            const schoolRemain = Math.max(0, schoolNeed - schoolCanTake);
+            const kinderRemain = Math.max(0, kinderNeed - kinderCanTake);
+            const schoolReserveNeeded = (schoolRemain > 0 && schoolCanTake > 0 && schoolRemain >= 200);
+            const kinderReserveNeeded = (kinderRemain > 120);
+            const prompt = `Ты эксперт по градостроительству. Отвечай ТОЛЬКО по-русски. 4-5 предложений.\n\nПравила:\n- Школа: резерв земли только если остаток необеспеченных мест >=200 И при этом часть детей отправляем в существующую школу (финансирование).\n- Сад: строится до 120 мест. Если остаток больше 120 — часть детей идёт в существующий сад (финансирование). В этом случае резерв земли нужен ВСЕГДА.\n- Школы: вторая смена — плохо, загрузка до 120% — норма.\n- Сады: загрузка до 140% — норма, очередь более 50 детей — плохо.\n\nДанные для нового ЖК:\n- Нужно построить: школа ${schoolNeed} мест, сад ${kinderNeed} мест.\n- Существующая школа: мощность ${schoolPlanVal}, факт ${schoolActualVal} (загрузка ${schoolLoad.toFixed(0)}%), вторая смена ${hasSecond ? "есть" : "нет"}. Можно принять дополнительно ${Math.max(0, schoolCanTake)} детей.\n- Существующий сад: мощность ${kinderPlanVal}, факт ${kinderActualVal} (загрузка ${kinderLoad.toFixed(0)}%), очередь ${hasQueue ? queueCount : 0} детей. Можно принять дополнительно ${Math.max(0, kinderCanTake)} детей.\n- Остаток после существующих: школа ${schoolRemain} мест, сад ${kinderRemain} мест.\n- Резерв земли нужен: школа ${schoolReserveNeeded ? "ДА" : "НЕТ"}, сад ${kinderReserveNeeded ? "ДА" : "НЕТ"}.\n\nОцени ситуацию и дай чёткую рекомендацию: что строить, что финансировать, нужен ли резерв земли.`;
+            aiText.innerHTML = "⏳ Анализирую данные...";
+            aiResponse.style.display = "block";
+            try {
+                const response = await fetch(PROXY_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: prompt }) });
+                const data = await response.json();
+                if (data.reply) aiText.innerHTML = data.reply;
+                else if (data.error) aiText.innerHTML = `❌ Ошибка: ${data.error}`;
+                else aiText.innerHTML = `❌ Не удалось получить ответ от ИИ.`;
+            } catch(err) { aiText.innerHTML = `❌ Ошибка соединения: ${err.message}. Проверьте VPN.`; }
         }
-    }
-    
-    aiOpinionBtn.addEventListener('click', () => {
-        const hasAnyData = (mainValue.value && parseFloat(mainValue.value)>0) || (schoolPlan.value && parseFloat(schoolPlan.value)>0) || (kinderPlan.value && parseFloat(kinderPlan.value)>0);
-        if(!hasAnyData) {
-            alert("Пожалуйста, введите данные (площадь жилья или население) перед запросом.");
-            return;
-        }
-        getAIOpinion();
-    });
-    
-    function toggleSecondShiftField() { secondShiftNumber.style.display = secondShiftToggle.checked ? "inline-block" : "none"; recalcMain(); }
-    function toggleQueueField() { queueNumber.style.display = queueToggle.checked ? "inline-block" : "none"; recalcMain(); }
-    
-    secondShiftToggle.addEventListener('change', toggleSecondShiftField);
-    queueToggle.addEventListener('change', toggleQueueField);
-    secondShiftNumber.addEventListener('input', recalcMain);
-    queueNumber.addEventListener('input', recalcMain);
-    schoolPlan.addEventListener('input', recalcMain);
-    schoolActual.addEventListener('input', recalcMain);
-    kinderPlan.addEventListener('input', recalcMain);
-    kinderActual.addEventListener('input', recalcMain);
-    calcType.addEventListener('change', () => { updateHint(); recalcMain(); });
-    mainValue.addEventListener('input', recalcMain);
-    
-    function initMain() { 
-        updateHint(); 
-        recalcMain(); 
-        toggleSecondShiftField(); 
-        toggleQueueField();
-        // Если поле городского округа изначально пустое — коэффициент 1.0
-        if (citySearchInput.value.trim() === "") {
-            districtCoeff = 1.0;
-            document.getElementById('coeffHint').innerHTML = `Коэффициент округа: 1.00 (не выбран)`;
-        }
-    }
-    initMain();
+        aiOpinionBtn.addEventListener('click', () => {
+            const hasAnyData = (mainValue.value && parseFloat(mainValue.value)>0) || (schoolPlan.value && parseFloat(schoolPlan.value)>0) || (kinderPlan.value && parseFloat(kinderPlan.value)>0);
+            if(!hasAnyData) { alert("Пожалуйста, введите данные (площадь жилья или население) перед запросом."); return; }
+            getAIOpinion();
+        });
+        function toggleSecondShiftField() { secondShiftNumber.style.display = secondShiftToggle.checked ? "inline-block" : "none"; recalcMain(); }
+        function toggleQueueField() { queueNumber.style.display = queueToggle.checked ? "inline-block" : "none"; recalcMain(); }
+        secondShiftToggle.addEventListener('change', toggleSecondShiftField);
+        queueToggle.addEventListener('change', toggleQueueField);
+        secondShiftNumber.addEventListener('input', recalcMain);
+        queueNumber.addEventListener('input', recalcMain);
+        schoolPlan.addEventListener('input', recalcMain);
+        schoolActual.addEventListener('input', recalcMain);
+        kinderPlan.addEventListener('input', recalcMain);
+        kinderActual.addEventListener('input', recalcMain);
+        calcType.addEventListener('change', () => { updateHint(); recalcMain(); });
+        mainValue.addEventListener('input', recalcMain);
+        function initMain() { updateHint(); recalcMain(); toggleSecondShiftField(); toggleQueueField(); if (citySearchInput.value.trim() === "") { districtCoeff = 1.0; document.getElementById('coeffHint').innerHTML = `Коэффициент округа: 1.00 (не выбран)`; } }
+        initMain();
+    })();
 </script>
 
-<!-- ========== СКРИПТ 2: РАСЧЁТ ЗУ И ПЛОЩАДОК (Расчет ЗУ.html) ========== -->
+<!-- СКРИПТ 2: РАСЧЁТ ЗУ И ПЛОЩАДОК -->
 <script>
-    // Полный скрипт из Расчет ЗУ.html, адаптированный под новые ID
-    const sportAreasZU = [
-        { id: "track_circular", name: "Круговая беговая дорожка", params: "200 м", area: 1468.5 },
-        { id: "track_straight", name: "Прямая беговая дорожка", params: "120 м", area: 825.6 },
-        { id: "basketball", name: "Баскетбольная площадка", params: "32×19 м", area: 608 },
-        { id: "volleyball", name: "Волейбольная площадка", params: "24×15 м", area: 360 },
-        { id: "football", name: "Футбольное поле", params: "60×40 м", area: 2400 },
-        { id: "obstacle", name: "Полоса препятствий", params: "9×50 м", area: 450 },
-        { id: "develop_1_4", name: "Спортивно-развивающая площадка (1-4 кл)", params: "15×15 м", area: 225 },
-        { id: "develop_5_11", name: "Спортивно-развивающая площадка (5-11 кл)", params: "15×15 м", area: 225 },
-        { id: "long_jump", name: "Площадка для прыжков в длину", params: "стандартная", area: 210 },
-        { id: "high_jump", name: "Площадка для прыжков в высоту", params: "стандартная", area: 400 }
-    ];
-    function getSchoolZUGroundZU(cap) { let norm; if(cap<=175) norm=80; else if(cap<=350) norm=55; else if(cap<=500) norm=45; else if(cap<=700) norm=40; else if(cap<=1000) norm=31; else if(cap<=1500) norm=24; else norm=22; let area=(cap*norm)/10000; return { area: Math.round(area*1000)/1000, norm: norm }; }
-    function getKindergartenZUGroundZU(cap) { let norm; if(cap<=100) norm=44; else if(cap<=500) norm=38; else norm=30; let area=(cap*norm)/10000; return { area: Math.round(area*1000)/1000, norm: norm }; }
-    function calculatePlaygroundsZU(parallel1_4, parallel5_9) { return { play1: parallel1_4*180, play2_4: 3*parallel1_4*100, play5_9: 5*parallel5_9*25 }; }
-    function getSchoolAreasZU(capacity, parallel1_4, parallel5_9, footballAvailable) { const playgrounds = calculatePlaygroundsZU(parallel1_4, parallel5_9); let sportArea = sportAreasZU.reduce((sum,a)=>{ if(a.id==='football' && footballAvailable) return sum; return sum+a.area; },0); return { sport: sportArea, play: playgrounds.play1+playgrounds.play2_4+playgrounds.play5_9, playgrounds: playgrounds }; }
-    function getKindergartenAreasZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) { const under3Area = childrenUnder3*7; const over3Area = childrenOver3*9; const playArea = under3Area+over3Area; let sportArea1=0, sportArea2=0; if(capacity<150) sportArea1=200; else { sportArea1=200; sportArea2=120; } return { playArea: playArea, sportArea1: sportArea1, sportArea2: sportArea2, totalSportArea: sportArea1+sportArea2 }; }
-    function updateZUDisplayZU(type, schoolCap, kinderCap) { const zuValueSpan = document.getElementById('zuValueZU'); const zuReducedSpan = document.getElementById('zuReducedValueZU'); const zuNoteSpan = document.getElementById('zuNoteZU'); if(type==='school'){ const zu=getSchoolZUGroundZU(schoolCap); zuValueSpan.innerHTML=`${zu.area} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(zu.area*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Норматив: ${zu.norm} м²/место`; } else if(type==='kindergarten'){ const zu=getKindergartenZUGroundZU(kinderCap); zuValueSpan.innerHTML=`${zu.area} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(zu.area*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Норматив: ${zu.norm} м²/место`; } else { const schoolZu=getSchoolZUGroundZU(schoolCap); const kinderZu=getKindergartenZUGroundZU(kinderCap); const total=schoolZu.area+kinderZu.area; zuValueSpan.innerHTML=`${total.toFixed(3)} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(total*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Школа: ${schoolZu.norm} м²/место (${schoolZu.area} га) + Сад: ${kinderZu.norm} м²/место (${kinderZu.area} га)`; } }
-    function toggleBlocksZU() { const type = document.getElementById('objectTypeZU').value; document.getElementById('schoolCapacityBlockZU').classList.toggle('hidden', type!=='school' && type!=='vok'); document.getElementById('kindergartenCapacityBlockZU').classList.toggle('hidden', type!=='kindergarten' && type!=='vok'); document.getElementById('parallelsBlockZU').classList.toggle('hidden', type!=='school' && type!=='vok'); document.getElementById('groupsBlockZU').classList.toggle('hidden', type!=='kindergarten' && type!=='vok'); document.getElementById('footballBlockZU').classList.toggle('hidden', type!=='school' && type!=='vok'); const schoolCap = parseInt(document.getElementById('schoolCapacityZU').value)||0; const kinderCap = parseInt(document.getElementById('kindergartenCapacityZU').value)||0; updateZUDisplayZU(type, schoolCap, kinderCap); }
-    function showMessageZU(msg, isError) { const resultsDiv = document.getElementById('resultsZU'); const div = document.createElement('div'); div.className='temp-message'; div.style.background=isError?'#f8d7da':'#d4edda'; div.style.color=isError?'#721c24':'#155724'; div.innerHTML=msg; resultsDiv.insertBefore(div, resultsDiv.firstChild); setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); },3000); }
-    function renderSchoolResultsZU(capacity, parallel1_4, parallel5_9, footballAvailable) { const areas = getSchoolAreasZU(capacity, parallel1_4, parallel5_9, footballAvailable); const totalSites = areas.sport+areas.play; let html=`<div class="result-card"><h3>📊 Школа на ${capacity} мест</h3></div>`; html+=`<div class="section-title">🏆 Спортивный блок</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`; sportAreasZU.forEach(area=>{ const isExcluded = area.id==='football' && footballAvailable; html+=`<tr style="${isExcluded ? 'background:#ffebee; text-decoration:line-through;' : ''}"><td>${area.name}${isExcluded ? ' (исключена)' : ''}</td><td>${area.params}</td><td>${area.area.toFixed(1)}</td></tr>`; }); html+=`<tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО спортивный блок</strong></td><td><strong>${areas.sport.toFixed(1)}</strong></td></tr></tbody><tr>`; html+=`<div class="section-title">🌳 Зона отдыха</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`; html+=`<tr><td>Площадки подвижных игр 1-х классов</td><td>180 м² на 1 класс</td><td>${areas.playgrounds.play1.toFixed(1)}</td></tr><tr><td>Площадки подвижных игр 2-4-х классов</td><td>100 м² на класс</td><td>${areas.playgrounds.play2_4.toFixed(1)}</td></tr><tr><td>Площадки подвижных игр 5-9-х классов</td><td>25 м² на класс</td><td>${areas.playgrounds.play5_9.toFixed(1)}</td></tr><tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО зона отдыха</strong></td><td><strong>${areas.play.toFixed(1)}</strong></td></tr></tbody></table>`; html+=`<div class="result-card"><h3>📊 Общая площадь: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`; return html; }
-    function renderKindergartenResultsZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) { const areas = getKindergartenAreasZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3); const totalSites = areas.playArea + areas.totalSportArea; let html=`<div class="result-card"><h3>🏫 Детский сад на ${capacity} мест</h3></div>`; html+=`<div class="section-title">🏞️ Групповые площадки</div><table class="result-table"><thead><tr><th>Возраст</th><th>Кол-во групп</th><th>Кол-во детей</th><th>Площадь (м²)</th></tr></thead><tbody>`; html+=`<tr><td>До 3 лет</td><td>${groupsUnder3}</td><td>${childrenUnder3}</td><td>${(childrenUnder3*7).toFixed(1)}</td></tr><tr><td>От 3 до 7 лет</td><td>${groupsOver3}</td><td>${childrenOver3}</td><td>${(childrenOver3*9).toFixed(1)}</td></tr><tr style="background:#e8f5e9;"><td colspan="3"><strong>ИТОГО групповые площадки</strong></td><td><strong>${areas.playArea.toFixed(1)}</strong></td></tr></tbody></table>`; html+=`<div class="section-title">🏃 Физкультурно-спортивные площадки</div><table class="result-table"><thead><tr><th>Наименование</th><th>Площадь (м²)</th></tr></thead><tbody>`; if(areas.sportArea1>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${areas.sportArea1.toFixed(1)}</td></tr>`; if(areas.sportArea2>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${areas.sportArea2.toFixed(1)}</td></tr>`; html+=`<tr style="background:#e8f5e9;"><td><strong>ИТОГО физкультурно-спортивные площадки</strong></td><td><strong>${areas.totalSportArea.toFixed(1)}</strong></td></tr></tbody><tr>`; html+=`<div class="result-card"><h3>📊 Общая площадь: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`; return html; }
-    function renderVOKResultsZU(schoolCap, kinderCap, parallel1_4, parallel5_9, footballAvailable, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) { const schoolAreas = getSchoolAreasZU(schoolCap, parallel1_4, parallel5_9, footballAvailable); const kinderAreas = getKindergartenAreasZU(kinderCap, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3); const totalSites = schoolAreas.sport+schoolAreas.play+kinderAreas.playArea+kinderAreas.totalSportArea; let html=`<div class="result-card"><h3>🏛️ ВОК (школа + детский сад)</h3></div>`; html+=`<div class="section-title">🏫 ШКОЛА (${schoolCap} мест)</div>`; html+=`<div class="section-title" style="font-size:14px;">🏆 Спортивный блок школы</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`; sportAreasZU.forEach(area=>{ const isExcluded = area.id==='football' && footballAvailable; html+=`<tr style="${isExcluded ? 'background:#ffebee; text-decoration:line-through;' : ''}"><td>${area.name}${isExcluded ? ' (исключена)' : ''}</td><td>${area.params}</td><td>${area.area.toFixed(1)}</td></tr>`; }); html+=`<tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО спортивный блок</strong></td><td><strong>${schoolAreas.sport.toFixed(1)}</strong></td></tr></tbody></table>`; html+=`<div class="section-title" style="font-size:14px;">🌳 Зона отдыха школы</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`; html+=`<tr><td>Площадки подвижных игр 1-х классов</td><td>180 м² на 1 класс</td><td>${schoolAreas.playgrounds.play1.toFixed(1)}</td></tr><tr><td>Площадки подвижных игр 2-4-х классов</td><td>100 м² на класс</td><td>${schoolAreas.playgrounds.play2_4.toFixed(1)}</td></tr><tr><td>Площадки подвижных игр 5-9-х классов</td><td>25 м² на класс</td><td>${schoolAreas.playgrounds.play5_9.toFixed(1)}</td></tr><tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО зона отдыха</strong></td><td><strong>${schoolAreas.play.toFixed(1)}</strong></td></tr></tbody></table><div class="result-card"><h4>📊 Итого школа: ${(schoolAreas.sport+schoolAreas.play).toFixed(1)} м²</h4></div>`; html+=`<div class="section-title">🏫 ДЕТСКИЙ САД (${kinderCap} мест)</div><div class="section-title" style="font-size:14px;">🏞️ Групповые площадки сада</div><table class="result-table"><thead><tr><th>Возраст</th><th>Кол-во групп</th><th>Кол-во детей</th><th>Площадь (м²)</th></tr></thead><tbody>`; html+=`<tr><td>До 3 лет</td><td>${groupsUnder3}</td><td>${childrenUnder3}</td><td>${(childrenUnder3*7).toFixed(1)}</td></tr><tr><td>От 3 до 7 лет</td><td>${groupsOver3}</td><td>${childrenOver3}</td><td>${(childrenOver3*9).toFixed(1)}</td></tr><tr style="background:#e8f5e9;"><td colspan="3"><strong>ИТОГО групповые площадки</strong></td><td><strong>${kinderAreas.playArea.toFixed(1)}</strong></td></tr></tbody></table><div class="section-title" style="font-size:14px;">🏃 Физкультурно-спортивные площадки сада</div><table class="result-table"><thead><tr><th>Наименование</th><th>Площадь (м²)</th></tr></thead><tbody>`; if(kinderAreas.sportArea1>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${kinderAreas.sportArea1.toFixed(1)}</td></tr>`; if(kinderAreas.sportArea2>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${kinderAreas.sportArea2.toFixed(1)}</td></tr>`; html+=`<tr style="background:#e8f5e9;"><td><strong>ИТОГО физкультурно-спортивные площадки</strong></td><td><strong>${kinderAreas.totalSportArea.toFixed(1)}</strong></td></tr></tbody></table><div class="result-card"><h4>📊 Итого детский сад: ${(kinderAreas.playArea+kinderAreas.totalSportArea).toFixed(1)} м²</h4></div><div class="result-card"><h3>📊 ОБЩАЯ ПЛОЩАДЬ ВОК: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`; return html; }
-    function calculateZU() { const type = document.getElementById('objectTypeZU').value; let html=''; if(type==='school'){ const capacity = parseInt(document.getElementById('schoolCapacityZU').value)||0; const parallel1_4 = parseInt(document.getElementById('parallel1_4ZU').value)||0; const parallel5_9 = parseInt(document.getElementById('parallel5_9ZU').value)||0; const footballAvailable = document.getElementById('footballToggleZU').checked; if(capacity<=0){ showMessageZU('⚠️ Введите мощность школы', true); return; } if(parallel1_4===0 && parallel5_9===0){ showMessageZU('⚠️ Введите количество параллелей', true); return; } html = renderSchoolResultsZU(capacity, parallel1_4, parallel5_9, footballAvailable); } else if(type==='kindergarten'){ const groupsUnder3 = parseInt(document.getElementById('groupsUnder3ZU').value)||0; const childrenUnder3 = parseInt(document.getElementById('childrenUnder3ZU').value)||0; const groupsOver3 = parseInt(document.getElementById('groupsOver3ZU').value)||0; const childrenOver3 = parseInt(document.getElementById('childrenOver3ZU').value)||0; const capacity = childrenUnder3+childrenOver3; if(capacity<=0){ showMessageZU('⚠️ Введите количество детей', true); return; } if(groupsUnder3===0 && groupsOver3===0){ showMessageZU('⚠️ Введите количество групп', true); return; } html = renderKindergartenResultsZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3); } else { const schoolCap = parseInt(document.getElementById('schoolCapacityZU').value)||0; const kinderCap = parseInt(document.getElementById('kindergartenCapacityZU').value)||0; const parallel1_4 = parseInt(document.getElementById('parallel1_4ZU').value)||0; const parallel5_9 = parseInt(document.getElementById('parallel5_9ZU').value)||0; const footballAvailable = document.getElementById('footballToggleZU').checked; const groupsUnder3 = parseInt(document.getElementById('groupsUnder3ZU').value)||0; const childrenUnder3 = parseInt(document.getElementById('childrenUnder3ZU').value)||0; const groupsOver3 = parseInt(document.getElementById('groupsOver3ZU').value)||0; const childrenOver3 = parseInt(document.getElementById('childrenOver3ZU').value)||0; if(schoolCap<=0 || kinderCap<=0){ showMessageZU('⚠️ Введите мощность школы и детского сада', true); return; } if(parallel1_4===0 && parallel5_9===0){ showMessageZU('⚠️ Введите количество параллелей для школы', true); return; } if(groupsUnder3===0 && groupsOver3===0){ showMessageZU('⚠️ Введите количество групп для сада', true); return; } html = renderVOKResultsZU(schoolCap, kinderCap, parallel1_4, parallel5_9, footballAvailable, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3); } document.getElementById('resultsZU').innerHTML = html; }
-    function resetFormZU() { document.getElementById('objectTypeZU').value='school'; document.getElementById('schoolCapacityZU').value=''; document.getElementById('kindergartenCapacityZU').value=''; document.getElementById('parallel1_4ZU').value='0'; document.getElementById('parallel5_9ZU').value='0'; document.getElementById('groupsUnder3ZU').value='0'; document.getElementById('childrenUnder3ZU').value='0'; document.getElementById('groupsOver3ZU').value='0'; document.getElementById('childrenOver3ZU').value='0'; document.getElementById('footballToggleZU').checked=false; document.getElementById('resultsZU').innerHTML=''; toggleBlocksZU(); showMessageZU('✅ Параметры сброшены', false); }
-    function downloadWordZU() { const resultsDiv = document.getElementById('resultsZU'); if(!resultsDiv.innerHTML || resultsDiv.innerHTML===''){ showMessageZU('⚠️ Сначала выполните расчёт', true); return; } const type = document.getElementById('objectTypeZU').value; const typeName = type==='school'?'Школа':(type==='kindergarten'?'Детский сад':'ВОК'); const content = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Расчёт ${typeName}</title><style>body{font-family:Arial;margin:40px;} table{border-collapse:collapse;width:100%;margin-bottom:20px;} th,td{border:1px solid #ddd;padding:8px;text-align:left;} th{background:#34495e;color:white;}</style></head><body><h1>Расчёт ${typeName}</h1>${resultsDiv.innerHTML}</body></html>`; const blob = new Blob([content], { type: 'application/msword' }); const link = document.createElement('a'); const url = URL.createObjectURL(blob); link.href = url; link.download = `расчет_${typeName}_${new Date().toISOString().slice(0,10)}.doc`; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url); showMessageZU('✅ Файл Word скачан', false); }
-    document.getElementById('objectTypeZU').addEventListener('change', toggleBlocksZU);
-    document.getElementById('calcBtnZU').addEventListener('click', calculateZU);
-    document.getElementById('resetBtnZU').addEventListener('click', resetFormZU);
-    document.getElementById('downloadWordBtnZU').addEventListener('click', downloadWordZU);
-    document.getElementById('schoolCapacityZU').addEventListener('input', () => { const type = document.getElementById('objectTypeZU').value; const schoolCap = parseInt(document.getElementById('schoolCapacityZU').value)||0; const kinderCap = parseInt(document.getElementById('kindergartenCapacityZU').value)||0; updateZUDisplayZU(type, schoolCap, kinderCap); });
-    document.getElementById('kindergartenCapacityZU').addEventListener('input', () => { const type = document.getElementById('objectTypeZU').value; const schoolCap = parseInt(document.getElementById('schoolCapacityZU').value)||0; const kinderCap = parseInt(document.getElementById('kindergartenCapacityZU').value)||0; updateZUDisplayZU(type, schoolCap, kinderCap); });
-    toggleBlocksZU();
+    (function() {
+        const schoolTypicalData = { 275:{parallel1_4:1,parallel5_9:1},550:{parallel1_4:2,parallel5_9:2},825:{parallel1_4:3,parallel5_9:3},1100:{parallel1_4:4,parallel5_9:4},1375:{parallel1_4:5,parallel5_9:5},1650:{parallel1_4:6,parallel5_9:6},1925:{parallel1_4:7,parallel5_9:7},2200:{parallel1_4:8,parallel5_9:8},2475:{parallel1_4:9,parallel5_9:9},2750:{parallel1_4:10,parallel5_9:10},3025:{parallel1_4:11,parallel5_9:11} };
+        const kindergartenTypicalData = { 100:{groupsUnder3:1,childrenUnder3:20,groupsOver3:4,childrenOver3:80},125:{groupsUnder3:1,childrenUnder3:25,groupsOver3:4,childrenOver3:100},150:{groupsUnder3:1,childrenUnder3:25,groupsOver3:4,childrenOver3:125},175:{groupsUnder3:1,childrenUnder3:25,groupsOver3:6,childrenOver3:150},200:{groupsUnder3:1,childrenUnder3:25,groupsOver3:7,childrenOver3:175},225:{groupsUnder3:1,childrenUnder3:25,groupsOver3:8,childrenOver3:200},250:{groupsUnder3:2,childrenUnder3:50,groupsOver3:8,childrenOver3:200},275:{groupsUnder3:2,childrenUnder3:50,groupsOver3:9,childrenOver3:225},300:{groupsUnder3:2,childrenUnder3:50,groupsOver3:10,childrenOver3:250},325:{groupsUnder3:2,childrenUnder3:50,groupsOver3:11,childrenOver3:275},350:{groupsUnder3:2,childrenUnder3:50,groupsOver3:12,childrenOver3:300},375:{groupsUnder3:3,childrenUnder3:75,groupsOver3:12,childrenOver3:300},400:{groupsUnder3:2,childrenUnder3:50,groupsOver3:14,childrenOver3:350} };
+        const sportAreasZU = [
+            { id: "track_circular", name: "Круговая беговая дорожка", params: "200 м", area: 1468.5 },
+            { id: "track_straight", name: "Прямая беговая дорожка", params: "120 м", area: 825.6 },
+            { id: "basketball", name: "Баскетбольная площадка", params: "32×19 м", area: 608 },
+            { id: "volleyball", name: "Волейбольная площадка", params: "24×15 м", area: 360 },
+            { id: "football", name: "Футбольное поле", params: "60×40 м", area: 2400 },
+            { id: "obstacle", name: "Полоса препятствий", params: "9×50 м", area: 450 },
+            { id: "develop_1_4", name: "Спортивно-развивающая площадка (1-4 кл)", params: "15×15 м", area: 225 },
+            { id: "develop_5_11", name: "Спортивно-развивающая площадка (5-11 кл)", params: "15×15 м", area: 225 },
+            { id: "long_jump", name: "Площадка для прыжков в длину", params: "стандартная", area: 210 },
+            { id: "high_jump", name: "Площадка для прыжков в высоту", params: "стандартная", area: 400 }
+        ];
+        function getSchoolZUGroundZU(cap) { let norm; if(cap<=175) norm=80; else if(cap<=350) norm=55; else if(cap<=500) norm=45; else if(cap<=700) norm=40; else if(cap<=1000) norm=31; else if(cap<=1500) norm=24; else norm=22; let area=(cap*norm)/10000; return { area: Math.round(area*1000)/1000, norm: norm }; }
+        function getKindergartenZUGroundZU(cap) { let norm; if(cap<=100) norm=44; else if(cap<=500) norm=38; else norm=30; let area=(cap*norm)/10000; return { area: Math.round(area*1000)/1000, norm: norm }; }
+        function calculatePlaygroundsZU(parallel1_4, parallel5_9) { return { play1: parallel1_4*180, play2_4: 3*parallel1_4*100, play5_9: 5*parallel5_9*25 }; }
+        function getSchoolAreasZU(capacity, parallel1_4, parallel5_9, footballAvailable) { const playgrounds = calculatePlaygroundsZU(parallel1_4, parallel5_9); let sportArea = sportAreasZU.reduce((sum,a)=>{ if(a.id==='football' && footballAvailable) return sum; return sum+a.area; },0); return { sport: sportArea, play: playgrounds.play1+playgrounds.play2_4+playgrounds.play5_9, playgrounds: playgrounds }; }
+        function getKindergartenAreasZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) { const under3Area = childrenUnder3*7; const over3Area = childrenOver3*9; const playArea = under3Area+over3Area; let sportArea1=0, sportArea2=0; if(capacity<150) sportArea1=200; else { sportArea1=200; sportArea2=120; } return { playArea: playArea, sportArea1: sportArea1, sportArea2: sportArea2, totalSportArea: sportArea1+sportArea2 }; }
+        function updateZUDisplayZU(type, schoolCap, kinderCap) {
+            const zuValueSpan = document.getElementById('zuValueZU');
+            const zuReducedSpan = document.getElementById('zuReducedValueZU');
+            const zuNoteSpan = document.getElementById('zuNoteZU');
+            if(type==='school'){ const zu=getSchoolZUGroundZU(schoolCap); zuValueSpan.innerHTML=`${zu.area} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(zu.area*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Норматив: ${zu.norm} м²/место`; }
+            else if(type==='kindergarten'){ const zu=getKindergartenZUGroundZU(kinderCap); zuValueSpan.innerHTML=`${zu.area} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(zu.area*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Норматив: ${zu.norm} м²/место`; }
+            else { const schoolZu=getSchoolZUGroundZU(schoolCap); const kinderZu=getKindergartenZUGroundZU(kinderCap); const total=schoolZu.area+kinderZu.area; zuValueSpan.innerHTML=`${total.toFixed(3)} га`; zuReducedSpan.innerHTML=`📉 с учётом сокращения 20%: ${(total*0.8).toFixed(3)} га`; zuNoteSpan.innerHTML=`Школа: ${schoolZu.norm} м²/место (${schoolZu.area} га) + Сад: ${kinderZu.norm} м²/место (${kinderZu.area} га)`; }
+        }
+        function createSchoolSelectZU(containerId, onChangeCallback) {
+            const select = document.createElement('select');
+            select.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            [275,550,825,1100,1375,1650,1925,2200,2475,2750,3025].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; select.appendChild(o); });
+            if(onChangeCallback) select.addEventListener('change', onChangeCallback);
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(select);
+            return select;
+        }
+        function createSchoolInputZU(containerId) {
+            const input = document.createElement('input');
+            input.type = 'number'; input.placeholder = 'Введите количество мест'; input.step = '1';
+            input.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(input);
+            return input;
+        }
+        function createKindergartenSelectZU(containerId, onChangeCallback) {
+            const select = document.createElement('select');
+            select.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            [100,125,150,175,200,225,250,275,300,325,350,375,400].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; select.appendChild(o); });
+            if(onChangeCallback) select.addEventListener('change', onChangeCallback);
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(select);
+            return select;
+        }
+        function createKindergartenInputZU(containerId) {
+            const input = document.createElement('input');
+            input.type = 'number'; input.placeholder = 'Введите количество мест'; input.step = '1';
+            input.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(input);
+            return input;
+        }
+        let schoolCapacityZU, kindergartenCapacityZU;
+        function rebuildSchoolControlZU() {
+            const isTypical = document.getElementById('typicalObjectToggleZU').checked;
+            if (isTypical) {
+                schoolCapacityZU = createSchoolSelectZU('schoolCapacityControlZU', () => {
+                    const val = parseInt(schoolCapacityZU.value);
+                    if (schoolTypicalData[val]) {
+                        document.getElementById('parallel1_4ZU').value = schoolTypicalData[val].parallel1_4;
+                        document.getElementById('parallel5_9ZU').value = schoolTypicalData[val].parallel5_9;
+                    }
+                    const type = document.getElementById('objectTypeZU').value;
+                    const schoolCap = parseInt(schoolCapacityZU.value) || 0;
+                    const kinderCap = kindergartenCapacityZU ? (parseInt(kindergartenCapacityZU.value) || 0) : 0;
+                    updateZUDisplayZU(type, schoolCap, kinderCap);
+                });
+            } else {
+                schoolCapacityZU = createSchoolInputZU('schoolCapacityControlZU');
+                schoolCapacityZU.addEventListener('input', () => {
+                    const type = document.getElementById('objectTypeZU').value;
+                    const schoolCap = parseInt(schoolCapacityZU.value) || 0;
+                    const kinderCap = kindergartenCapacityZU ? (parseInt(kindergartenCapacityZU.value) || 0) : 0;
+                    updateZUDisplayZU(type, schoolCap, kinderCap);
+                });
+            }
+        }
+        function rebuildKindergartenControlZU() {
+            const isTypical = document.getElementById('typicalObjectToggleZU').checked;
+            if (isTypical) {
+                kindergartenCapacityZU = createKindergartenSelectZU('kindergartenCapacityControlZU', () => {
+                    const val = parseInt(kindergartenCapacityZU.value);
+                    if (kindergartenTypicalData[val]) {
+                        document.getElementById('groupsUnder3ZU').value = kindergartenTypicalData[val].groupsUnder3;
+                        document.getElementById('childrenUnder3ZU').value = kindergartenTypicalData[val].childrenUnder3;
+                        document.getElementById('groupsOver3ZU').value = kindergartenTypicalData[val].groupsOver3;
+                        document.getElementById('childrenOver3ZU').value = kindergartenTypicalData[val].childrenOver3;
+                    }
+                    const type = document.getElementById('objectTypeZU').value;
+                    const schoolCap = schoolCapacityZU ? (parseInt(schoolCapacityZU.value) || 0) : 0;
+                    const kinderCap = parseInt(kindergartenCapacityZU.value) || 0;
+                    updateZUDisplayZU(type, schoolCap, kinderCap);
+                });
+            } else {
+                kindergartenCapacityZU = createKindergartenInputZU('kindergartenCapacityControlZU');
+                kindergartenCapacityZU.addEventListener('input', () => {
+                    const type = document.getElementById('objectTypeZU').value;
+                    const schoolCap = schoolCapacityZU ? (parseInt(schoolCapacityZU.value) || 0) : 0;
+                    const kinderCap = parseInt(kindergartenCapacityZU.value) || 0;
+                    updateZUDisplayZU(type, schoolCap, kinderCap);
+                });
+            }
+        }
+        function toggleBlocksZU() {
+            const type = document.getElementById('objectTypeZU').value;
+            document.getElementById('schoolCapacityBlockZU').classList.toggle('hidden', type !== 'school' && type !== 'vok');
+            document.getElementById('kindergartenCapacityBlockZU').classList.toggle('hidden', type !== 'kindergarten' && type !== 'vok');
+            document.getElementById('parallelsBlockZU').classList.toggle('hidden', type !== 'school' && type !== 'vok');
+            document.getElementById('groupsBlockZU').classList.toggle('hidden', type !== 'kindergarten' && type !== 'vok');
+            document.getElementById('footballBlockZU').classList.toggle('hidden', type !== 'school' && type !== 'vok');
+            if (type === 'school' || type === 'vok') rebuildSchoolControlZU();
+            if (type === 'kindergarten' || type === 'vok') rebuildKindergartenControlZU();
+        }
+        function showMessageZU(msg, isError) { const resultsDiv = document.getElementById('resultsZU'); const div = document.createElement('div'); div.className='temp-message'; div.style.background=isError?'#f8d7da':'#d4edda'; div.style.color=isError?'#721c24':'#155724'; div.innerHTML=msg; resultsDiv.insertBefore(div, resultsDiv.firstChild); setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); },3000); }
+        function renderSchoolResultsZU(capacity, parallel1_4, parallel5_9, footballAvailable) {
+            const areas = getSchoolAreasZU(capacity, parallel1_4, parallel5_9, footballAvailable);
+            const totalSites = areas.sport+areas.play;
+            let html=`<div class="result-card"><h3>📊 Школа на ${capacity} мест</h3></div>`;
+            html+=`<div class="section-title">🏆 Спортивный блок</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            sportAreasZU.forEach(area=>{ const isExcluded = area.id==='football' && footballAvailable; html+=`<tr style="${isExcluded ? 'background:#ffebee; text-decoration:line-through;' : ''}"><td>${area.name}${isExcluded ? ' (исключена)' : ''}</td><td>${area.params}</td><td>${area.area.toFixed(1)}</td></tr>`; });
+            html+=`<tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО спортивный блок</strong></td><td><strong>${areas.sport.toFixed(1)}</strong></td></tr></tbody></table>`;
+            html+=`<div class="section-title">🌳 Зона отдыха</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            html+=`<tr><td>Площадки подвижных игр 1-х классов</td><td>180 м² на 1 класс</td><td>${areas.playgrounds.play1.toFixed(1)}</td><tr><tr><td>Площадки подвижных игр 2-4-х классов</td><td>100 м² на класс</td><td>${areas.playgrounds.play2_4.toFixed(1)}</td><tr><tr><td>Площадки подвижных игр 5-9-х классов</td><td>25 м² на класс</td><td>${areas.playgrounds.play5_9.toFixed(1)}</td><tr><tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО зона отдыха</strong></td><td><strong>${areas.play.toFixed(1)}</strong></td></tr></tbody></table>`;
+            html+=`<div class="result-card"><h3>📊 Общая площадь: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`;
+            return html;
+        }
+        function renderKindergartenResultsZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) {
+            const areas = getKindergartenAreasZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3);
+            const totalSites = areas.playArea + areas.totalSportArea;
+            let html=`<div class="result-card"><h3>🏫 Детский сад на ${capacity} мест</h3></div>`;
+            html+=`<div class="section-title">🏞️ Групповые площадки</div><table class="result-table"><thead><tr><th>Возраст</th><th>Кол-во групп</th><th>Кол-во детей</th><th>Площадь (м²)</th><tr></thead><tbody>`;
+            html+=`<tr><td>До 3 лет</td><td>${groupsUnder3}</td><td>${childrenUnder3}</td><td>${(childrenUnder3*7).toFixed(1)}</td></tr>
+            <tr><td>От 3 до 7 лет</td><td>${groupsOver3}</td><td>${childrenOver3}</td><td>${(childrenOver3*9).toFixed(1)}</td></tr>
+            <tr style="background:#e8f5e9;"><td colspan="3"><strong>ИТОГО групповые площадки</strong></td><td><strong>${areas.playArea.toFixed(1)}</strong></td></tr>
+            </tbody></table>`;
+            html+=`<div class="section-title">🏃 Физкультурно-спортивные площадки</div><table class="result-table"><thead><tr><th>Наименование</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            if(areas.sportArea1>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${areas.sportArea1.toFixed(1)}</td></tr>`;
+            if(areas.sportArea2>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${areas.sportArea2.toFixed(1)}</td></tr>`;
+            html+=`<tr style="background:#e8f5e9;"><td><strong>ИТОГО физкультурно-спортивные площадки</strong></td><td><strong>${areas.totalSportArea.toFixed(1)}</strong></td></tr>
+            </tbody></table>`;
+            html+=`<div class="result-card"><h3>📊 Общая площадь: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`;
+            return html;
+        }
+        function renderVOKResultsZU(schoolCap, kinderCap, parallel1_4, parallel5_9, footballAvailable, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3) {
+            const schoolAreas = getSchoolAreasZU(schoolCap, parallel1_4, parallel5_9, footballAvailable);
+            const kinderAreas = getKindergartenAreasZU(kinderCap, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3);
+            const totalSites = schoolAreas.sport+schoolAreas.play+kinderAreas.playArea+kinderAreas.totalSportArea;
+            let html=`<div class="result-card"><h3>🏛️ ВОК (школа + детский сад)</h3></div>`;
+            html+=`<div class="section-title">🏫 ШКОЛА (${schoolCap} мест)</div><div class="section-title" style="font-size:14px;">🏆 Спортивный блок школы</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            sportAreasZU.forEach(area=>{ const isExcluded = area.id==='football' && footballAvailable; html+=`<tr style="${isExcluded ? 'background:#ffebee; text-decoration:line-through;' : ''}"><td>${area.name}${isExcluded ? ' (исключена)' : ''}</td><td>${area.params}</td><td>${area.area.toFixed(1)}</td></tr>`; });
+            html+=`<tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО спортивный блок</strong></td><td><strong>${schoolAreas.sport.toFixed(1)}</strong></td></tr></tbody></table>`;
+            html+=`<div class="section-title" style="font-size:14px;">🌳 Зона отдыха школы</div><table class="result-table"><thead><tr><th>Наименование</th><th>Параметры</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            html+=`<tr><td>Площадки подвижных игр 1-х классов</td><td>180 м² на 1 класс</td><td>${schoolAreas.playgrounds.play1.toFixed(1)}</td></tr>
+            <tr><td>Площадки подвижных игр 2-4-х классов</td><td>100 м² на класс</td><td>${schoolAreas.playgrounds.play2_4.toFixed(1)}</td></tr>
+            <tr><td>Площадки подвижных игр 5-9-х классов</td><td>25 м² на класс</td><td>${schoolAreas.playgrounds.play5_9.toFixed(1)}</td></tr>
+            <tr style="background:#e8f5e9;"><td colspan="2"><strong>ИТОГО зона отдыха</strong></td><td><strong>${schoolAreas.play.toFixed(1)}</strong></td></tr></tbody></table><div class="result-card"><h4>📊 Итого школа: ${(schoolAreas.sport+schoolAreas.play).toFixed(1)} м²</h4></div>`;
+            html+=`<div class="section-title">🏫 ДЕТСКИЙ САД (${kinderCap} мест)</div><div class="section-title" style="font-size:14px;">🏞️ Групповые площадки сада</div><table class="result-table"><thead><tr><th>Возраст</th><th>Кол-во групп</th><th>Кол-во детей</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            html+=`<tr><td>До 3 лет</td><td>${groupsUnder3}</td><td>${childrenUnder3}</td><td>${(childrenUnder3*7).toFixed(1)}</td></tr>
+            <tr><td>От 3 до 7 лет</td><td>${groupsOver3}</td><td>${childrenOver3}</td><td>${(childrenOver3*9).toFixed(1)}</td></tr>
+            <tr style="background:#e8f5e9;"><td colspan="3"><strong>ИТОГО групповые площадки</strong></td><td><strong>${kinderAreas.playArea.toFixed(1)}</strong></td></tr></tbody></table>`;
+            html+=`<div class="section-title" style="font-size:14px;">🏃 Физкультурно-спортивные площадки сада</div><table class="result-table"><thead><tr><th>Наименование</th><th>Площадь (м²)</th></tr></thead><tbody>`;
+            if(kinderAreas.sportArea1>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${kinderAreas.sportArea1.toFixed(1)}</td></tr>`;
+            if(kinderAreas.sportArea2>0) html+=`<tr><td>Физкультурно-спортивная площадка</td><td>${kinderAreas.sportArea2.toFixed(1)}</td></tr>`;
+            html+=`<tr style="background:#e8f5e9;"><td><strong>ИТОГО физкультурно-спортивные площадки</strong></td><td><strong>${kinderAreas.totalSportArea.toFixed(1)}</strong></td></tr></tbody></table><div class="result-card"><h4>📊 Итого детский сад: ${(kinderAreas.playArea+kinderAreas.totalSportArea).toFixed(1)} м²</h4></div><div class="result-card"><h3>📊 ОБЩАЯ ПЛОЩАДЬ ВОК: ${totalSites.toFixed(1)} м² (${(totalSites/10000).toFixed(3)} га)</h3></div>`;
+            return html;
+        }
+        function calculateZU() {
+            const type = document.getElementById('objectTypeZU').value;
+            let html='';
+            if(type==='school'){
+                const capacity = schoolCapacityZU ? (parseInt(schoolCapacityZU.value)||0) : 0;
+                const parallel1_4 = parseInt(document.getElementById('parallel1_4ZU').value)||0;
+                const parallel5_9 = parseInt(document.getElementById('parallel5_9ZU').value)||0;
+                const footballAvailable = document.getElementById('footballToggleZU').checked;
+                if(capacity<=0){ showMessageZU('⚠️ Введите мощность школы', true); return; }
+                html = renderSchoolResultsZU(capacity, parallel1_4, parallel5_9, footballAvailable);
+            } else if(type==='kindergarten'){
+                const groupsUnder3 = parseInt(document.getElementById('groupsUnder3ZU').value)||0;
+                const childrenUnder3 = parseInt(document.getElementById('childrenUnder3ZU').value)||0;
+                const groupsOver3 = parseInt(document.getElementById('groupsOver3ZU').value)||0;
+                const childrenOver3 = parseInt(document.getElementById('childrenOver3ZU').value)||0;
+                const capacity = childrenUnder3+childrenOver3;
+                if(capacity<=0){ showMessageZU('⚠️ Введите количество детей', true); return; }
+                html = renderKindergartenResultsZU(capacity, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3);
+            } else {
+                const schoolCap = schoolCapacityZU ? (parseInt(schoolCapacityZU.value)||0) : 0;
+                const kinderCap = kindergartenCapacityZU ? (parseInt(kindergartenCapacityZU.value)||0) : 0;
+                const parallel1_4 = parseInt(document.getElementById('parallel1_4ZU').value)||0;
+                const parallel5_9 = parseInt(document.getElementById('parallel5_9ZU').value)||0;
+                const footballAvailable = document.getElementById('footballToggleZU').checked;
+                const groupsUnder3 = parseInt(document.getElementById('groupsUnder3ZU').value)||0;
+                const childrenUnder3 = parseInt(document.getElementById('childrenUnder3ZU').value)||0;
+                const groupsOver3 = parseInt(document.getElementById('groupsOver3ZU').value)||0;
+                const childrenOver3 = parseInt(document.getElementById('childrenOver3ZU').value)||0;
+                if(schoolCap<=0 || kinderCap<=0){ showMessageZU('⚠️ Введите мощность школы и детского сада', true); return; }
+                html = renderVOKResultsZU(schoolCap, kinderCap, parallel1_4, parallel5_9, footballAvailable, groupsUnder3, childrenUnder3, groupsOver3, childrenOver3);
+            }
+            document.getElementById('resultsZU').innerHTML = html;
+        }
+        function resetFormZU() {
+            document.getElementById('objectTypeZU').value='school';
+            document.getElementById('typicalObjectToggleZU').checked=true;
+            document.getElementById('parallel1_4ZU').value='0';
+            document.getElementById('parallel5_9ZU').value='0';
+            document.getElementById('groupsUnder3ZU').value='0';
+            document.getElementById('childrenUnder3ZU').value='0';
+            document.getElementById('groupsOver3ZU').value='0';
+            document.getElementById('childrenOver3ZU').value='0';
+            document.getElementById('footballToggleZU').checked=false;
+            document.getElementById('resultsZU').innerHTML='';
+            toggleBlocksZU();
+            showMessageZU('✅ Параметры сброшены', false);
+        }
+        function downloadWordZU() {
+            const resultsDiv = document.getElementById('resultsZU');
+            if(!resultsDiv.innerHTML || resultsDiv.innerHTML===''){ showMessageZU('⚠️ Сначала выполните расчёт', true); return; }
+            const type = document.getElementById('objectTypeZU').value;
+            const typeName = type==='school'?'Школа':(type==='kindergarten'?'Детский сад':'ВОК');
+            const content = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Расчёт ${typeName}</title><style>body{font-family:Arial;margin:40px;} table{border-collapse:collapse;width:100%;margin-bottom:20px;} th,td{border:1px solid #ddd;padding:8px;text-align:left;} th{background:#34495e;color:white;}</style></head><body><h1>Расчёт ${typeName}</h1>${resultsDiv.innerHTML}</body></html>`;
+            const blob = new Blob([content], { type: 'application/msword' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.href = url;
+            link.download = `расчет_${typeName}_${new Date().toISOString().slice(0,10)}.doc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            showMessageZU('✅ Файл Word скачан', false);
+        }
+        document.getElementById('objectTypeZU').addEventListener('change', toggleBlocksZU);
+        document.getElementById('calcBtnZU').addEventListener('click', calculateZU);
+        document.getElementById('resetBtnZU').addEventListener('click', resetFormZU);
+        document.getElementById('downloadWordBtnZU').addEventListener('click', downloadWordZU);
+        document.getElementById('typicalObjectToggleZU').addEventListener('change', () => { toggleBlocksZU(); });
+        toggleBlocksZU();
+    })();
 </script>
 
-<!-- ========== СКРИПТ 3: РАСЧЁТ ПОМЕЩЕНИЙ (Помещения.html) ========== -->
+<!-- СКРИПТ 3: РАСЧЁТ ПОМЕЩЕНИЙ -->
 <script>
-    // Полный скрипт из Помещения.html, адаптированный под новые ID
-    function getClassesFromChildrenRooms(children) { return Math.ceil(children / 25); }
-    function getSchoolRoomsRooms(capacity, children1_4, children5_11) {
-        const classes1_4 = getClassesFromChildrenRooms(children1_4);
-        const classes5_11 = getClassesFromChildrenRooms(children5_11);
-        let оснКабинетыНач = classes1_4; let площадьОснКабНач = 64.5; let кабинетМузыкиНач = 1; let площадьМузыкиНач = 64.5; let спортзалНач = 1; let площадьСпортзалаНач = 24*12;
-        let кабФизики = capacity < 725 ? 1 : (capacity < 1275 ? 2 : (capacity < 1825 ? 3 : (capacity < 2375 ? 4 : (capacity < 2925 ? 5 : 6))));
-        let кабБиологии = кабФизики; let кабХимии = кабФизики;
-        let кабИноЯз = capacity < 450 ? 2 : (capacity < 725 ? 4 : (capacity < 1550 ? 4 : (capacity < 2100 ? 8 : (capacity < 2750 ? 12 : 14))));
-        let кабИнформатики = capacity < 725 ? 2 : (capacity < 1275 ? 2 : (capacity < 1825 ? 4 : (capacity < 2375 ? 6 : (capacity < 2925 ? 8 : 10))));
-        let мастерские = capacity < 2350 ? 1 : 2; let кабинетМузыкиОсн = capacity >= 700 ? 1 : 0;
-        let площадьСпецКаб = 64.5; let площадьИнформатики = 13*4.5; let площадьМастерской = 13*9; let площадьКулинарии = 13*6; let площадьТкани = 13*6;
-        let оснКабинетыОсн = Math.max(0, classes5_11 - (кабФизики+кабБиологии+кабХимии+кабИноЯз+кабИнформатики+мастерские*3+кабинетМузыкиОсн));
-        let площадьОснКабОсн = 64.5;
-        let лаборантские = Math.round(кабФизики/2)+Math.round(кабБиологии/2)+кабХимии; let площадьЛаборантской = 18;
-        let инструментальная = мастерские; let площадьИнструментальной = 15;
-        let спортзал1 = capacity < 350 ? "24x12" : "30x18"; let площадьСпортзала1 = спортзал1==="24x12"?288:540;
-        let спортзал2 = capacity < 1275 ? 0 : (capacity < 1550 ? "24x12" : (capacity < 2100 ? "24x12" : "30x18"));
-        let площадьСпортзала2 = спортзал2==="24x12"?288:(спортзал2==="30x18"?540:0);
-        let обеденныйЗал = Math.ceil(capacity/2); let площадьОбеденногоЗала = обеденныйЗал*0.7;
-        let актовыйЗал = Math.ceil((children1_4+children5_11)/2); let площадьАктовогоЗала = актовыйЗал*0.65+70+20+10+10;
-        let библиотекаМест = Math.ceil(capacity*0.1); let itЗонаМест = Math.ceil(библиотекаМест*0.3);
-        let площадьБиблиотеки = capacity < 725 ? (библиотекаМест*0.7*2.4+64.5+(библиотекаМест*0.3*4.5)) : ((библиотекаМест-50)*2.4+64.5+112.5+87.5);
-        let медблок = 95;
-        let общаяПлощадь = (оснКабинетыНач*площадьОснКабНач)+(кабинетМузыкиНач*площадьМузыкиНач)+площадьСпортзалаНач+(оснКабинетыОсн*площадьОснКабОсн)+(кабФизики+кабБиологии+кабХимии+кабИноЯз)*площадьСпецКаб+кабИнформатики*площадьИнформатики+мастерские*площадьМастерской+мастерские*площадьКулинарии+мастерские*площадьТкани+(кабинетМузыкиОсн*площадьМузыкиНач)+лаборантские*площадьЛаборантской+инструментальная*площадьИнструментальной+площадьСпортзала1+площадьСпортзала2+площадьОбеденногоЗала+площадьАктовогоЗала+площадьБиблиотеки+медблок;
-        return { total: общаяПлощадь, details: { оснКабинетыНач, кабинетМузыкиНач, спортзалНач, оснКабинетыОсн, кабФизики, кабБиологии, кабХимии, кабИноЯз, кабИнформатики, мастерские, кабинетМузыкиОсн, лаборантские, инструментальная, спортзал1, спортзал2, обеденныйЗал, актовыйЗал, библиотекаМест, itЗонаМест, медблок } };
-    }
-    function getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, totalCapacity) {
-        let игроваяПлощадьUnder=0, игроваяПлощадьOver=0; if(childrenUnder3>0) игроваяПлощадьUnder = (childrenUnder3*2.5)+(groupsUnder3*2); if(childrenOver3>0) игроваяПлощадьOver = (childrenOver3*2.0)+(groupsOver3*2);
-        let спальняПлощадьUnder=0, спальняПлощадьOver=0; if(childrenUnder3>0) спальняПлощадьUnder = childrenUnder3*1.8; if(childrenOver3>0) спальняПлощадьOver = childrenOver3*2.0;
-        let музыкальныйЗал = totalCapacity<121?0:(totalCapacity<251?50:100); let спортивныйЗал = totalCapacity<121?0:(totalCapacity<250?75:100); let спортивноМузыкальный = totalCapacity<121?75:0;
-        let общаяПлощадь = игроваяПлощадьUnder+игроваяПлощадьOver+спальняПлощадьUnder+спальняПлощадьOver+музыкальныйЗал+спортивныйЗал+спортивноМузыкальный;
-        return { total: общаяПлощадь, details: { groupsUnder3, childrenUnder3, groupsOver3, childrenOver3, игроваяПлощадьUnder, игроваяПлощадьOver, спальняПлощадьUnder, спальняПлощадьOver, музыкальныйЗал, спортивныйЗал, спортивноМузыкальный } };
-    }
-    function renderSchoolRooms(capacity, children1_4, children5_11) {
-        const rooms = getSchoolRoomsRooms(capacity, children1_4, children5_11); const d = rooms.details;
-        let html = `<div class="result-card"><h3>🏫 Школа на ${capacity} мест</h3></div><div class="section-title">📚 Начальная школа (1–4 классы)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th></tr><tr><td>Основные кабинеты</td><td>${d.оснКабинетыНач}</td><td>${(d.оснКабинетыНач*64.5).toFixed(1)}</td></tr><td>Кабинет музыки</td><td>${d.кабинетМузыкиНач}</td><td>${(d.кабинетМузыкиНач*64.5).toFixed(1)}</td></tr><td>Спортивный зал (24×12)</td><td>${d.спортзалНач}</td><td>288.0</td></tr></table><div class="section-title">📚 Основная и старшая школа (5–11 классы)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th><tr><td>Основные кабинеты</td><td>${d.оснКабинетыОсн}</td><td>${(d.оснКабинетыОсн*64.5).toFixed(1)}</td></tr><td>Кабинет физики</td><td>${d.кабФизики}</td><td>${(d.кабФизики*64.5).toFixed(1)}</td></tr><td>Кабинет биологии</td><td>${d.кабБиологии}</td><td>${(d.кабБиологии*64.5).toFixed(1)}</td></tr><td>Кабинет химии</td><td>${d.кабХимии}</td><td>${(d.кабХимии*64.5).toFixed(1)}</td></tr><td>Кабинет иностранного языка</td><td>${d.кабИноЯз}</td><td>${(d.кабИноЯз*64.5).toFixed(1)}</td></tr><td>Кабинет информатики</td><td>${d.кабИнформатики}</td><td>${(d.кабИнформатики*58.5).toFixed(1)}</td></tr><td>Мастерские (металл/дерево)</td><td>${d.мастерские}</td><td>${(d.мастерские*117).toFixed(1)}</td></tr><td>Кабинет кулинарии</td><td>${d.мастерские}</td><td>${(d.мастерские*78).toFixed(1)}</td></tr><td>Кабинет обработки ткани</td><td>${d.мастерские}</td><td>${(d.мастерские*78).toFixed(1)}</td></tr>${d.кабинетМузыкиОсн>0?`<tr><td>Кабинет музыки (старшие классы)</td><td>${d.кабинетМузыкиОсн}</td><td>${(d.кабинетМузыкиОсн*64.5).toFixed(1)}</td></tr>`:''}</table><div class="section-title">🏆 Спортивный блок</div><table class="result-table"><tr><td>Спортивный зал (основной)</td><td>1</td><td>${d.спортзал1==="24x12"?288:540}</td></tr>${d.спортзал2>0?`<tr><td>Спортивный зал (второй)</td><td>1</td><td>288.0</td></tr>`:''}</table><div class="subsection-title">🔬 Лаборантские и вспомогательные</div><table class="result-table"><tr><td>Лаборантские</td><td>${d.лаборантские}</td><td>${(d.лаборантские*18).toFixed(1)}</td></tr><td>Инструментальная</td><td>${d.инструментальная}</td><td>${(d.инструментальная*15).toFixed(1)}</td></tr></td><div class="section-title">🏛️ Общешкольные помещения</div><table class="result-table"><tr><td>Обеденный зал</td><td>${d.обеденныйЗал} посадочных мест</td><td>${(d.обеденныйЗал*0.7).toFixed(1)}</td></tr><td>Актовый зал</td><td>${d.актовыйЗал} посадочных мест</td><td>${(d.актовыйЗал*0.65+70+20+10+10).toFixed(1)}</td></tr><td>Библиотека (10% от мощности)</td><td>${d.библиотекаМест} мест<br>IT-зона не менее ${d.itЗонаМест} мест</td><td>${capacity<725?(d.библиотекаМест*0.7*2.4+64.5+(d.библиотекаМест*0.3*4.5)).toFixed(1):((d.библиотекаМест-50)*2.4+64.5+112.5+87.5).toFixed(1)}</td></tr><td>Медицинский блок</td><td>комплекс</td><td>95.0</td></tr></table>`;
-        document.getElementById('totalAreaValueRooms').innerHTML = `${rooms.total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `по всем представленным помещениям школы`; return html;
-    }
-    function renderKindergartenRooms(capacity, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3) {
-        const rooms = getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, capacity); const d = rooms.details;
-        let html = `<div class="result-card"><h3>🏫 Детский сад на ${capacity} мест</h3></div><div class="section-title">👶 Групповые помещения (до 3 лет)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Норматив</th><th>Общая площадь (м²)</th></tr>`; if(childrenUnder3>0){ html+=`<tr><td>Игровые комнаты</td><td>${groupsUnder3}</td><td>2,5 м²/реб + 2 м² на группу (мебель)</td><td>${d.игроваяПлощадьUnder.toFixed(1)}</td><tr><td>Спальни</td><td>${groupsUnder3}</td><td>1,8 м²/реб</td><td>${d.спальняПлощадьUnder.toFixed(1)}</td></tr>`; } else { html+=`<tr><td colspan="4">Нет детей до 3 лет</tr>`; } html+=`</table><div class="section-title">👧 Групповые помещения (от 3 до 7 лет)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Норматив</th><th>Общая площадь (м²)</th></tr>`; if(childrenOver3>0){ html+=`<tr><td>Игровые комнаты</td><td>${groupsOver3}</td><td>2,0 м²/реб + 2 м² на группу (мебель)</td><td>${d.игроваяПлощадьOver.toFixed(1)}</td><tr><td>Спальни</td><td>${groupsOver3}</td><td>2,0 м²/реб</td><td>${d.спальняПлощадьOver.toFixed(1)}</td></tr>`; } else { html+=`<tr><td colspan="4">Нет детей от 3 до 7 лет</tr>`; } html+=`</table><div class="section-title">🏃 Спортивно-музыкальные помещения</div><table class="result-table"><tr><th>Наименование</th><th>Площадь (м²)</th></tr>`; if(d.музыкальныйЗал>0) html+=`<tr><td>Музыкальный зал</td><td>${d.музыкальныйЗал}</td></tr>`; if(d.спортивныйЗал>0) html+=`<tr><td>Спортивный зал</td><td>${d.спортивныйЗал}</td></tr>`; if(d.спортивноМузыкальный>0) html+=`<tr><td>Спортивно-музыкальный зал</td><td>${d.спортивноМузыкальный}</td></tr>`; if(d.музыкальныйЗал===0 && d.спортивныйЗал===0 && d.спортивноМузыкальный===0) html+=`<tr><td colspan="2">Не предусмотрены (мощность менее 120 мест)</tr>`; html+=`</table>`; document.getElementById('totalAreaValueRooms').innerHTML = `${rooms.total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `по всем представленным помещениям сада`; return html;
-    }
-    function renderVOKRooms(schoolCap, kinderCap, children1_4, children5_11, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3) {
-        const school = getSchoolRoomsRooms(schoolCap, children1_4, children5_11); const kinder = getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, kinderCap); const total = school.total + kinder.total;
-        let html = `<div class="result-card"><h3>🏛️ ВОК (школа + детский сад)</h3></div><div class="section-title">🏫 Школa (${schoolCap} мест)</div><table class="result-table"><tr><th>Показатель</th><th>Значение</th></tr><tr><td>Общая площадь помещений школы</td><td><strong>${school.total.toFixed(1)} м²</strong></td></tr></table><div class="section-title">🏫 Детский сад (${kinderCap} мест)</div><table class="result-table"><tr><th>Показатель</th><th>Значение</th><tr><td>Общая площадь помещений сада</td><td><strong>${kinder.total.toFixed(1)} м²</strong></td></tr></table><div class="total-card"><div class="total-value">${total.toFixed(1)} м²</div><div>ИТОГО по ВОК (школа + сад)</div></div>`;
-        document.getElementById('totalAreaValueRooms').innerHTML = `${total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `суммарная площадь школы и сада`; return html;
-    }
-    function calculateRooms() {
-        const type = document.getElementById('objectTypeRooms').value; let html='';
-        if(type==='school'){ const capacity = parseInt(document.getElementById('schoolCapacityRooms').value)||0; const children1_4 = parseInt(document.getElementById('children1_4Rooms').value)||0; const children5_11 = parseInt(document.getElementById('children5_11Rooms').value)||0; if(capacity<=0){ showMessageRooms('⚠️ Введите мощность школы', true); return; } if(children1_4===0 && children5_11===0){ showMessageRooms('⚠️ Введите количество детей в 1-4 и/или 5-11 классах', true); return; } html = renderSchoolRooms(capacity, children1_4, children5_11); }
-        else if(type==='kindergarten'){ const childrenUnder3 = parseInt(document.getElementById('childrenUnder3Rooms').value)||0; const groupsUnder3 = parseInt(document.getElementById('groupsUnder3Rooms').value)||0; const childrenOver3 = parseInt(document.getElementById('childrenOver3Rooms').value)||0; const groupsOver3 = parseInt(document.getElementById('groupsOver3Rooms').value)||0; const capacity = childrenUnder3+childrenOver3; if(capacity<=0){ showMessageRooms('⚠️ Введите количество детей', true); return; } html = renderKindergartenRooms(capacity, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3); }
-        else{ const schoolCap = parseInt(document.getElementById('schoolCapacityRooms').value)||0; const kinderCap = parseInt(document.getElementById('kindergartenCapacityRooms').value)||0; const children1_4 = parseInt(document.getElementById('children1_4Rooms').value)||0; const children5_11 = parseInt(document.getElementById('children5_11Rooms').value)||0; const childrenUnder3 = parseInt(document.getElementById('childrenUnder3Rooms').value)||0; const groupsUnder3 = parseInt(document.getElementById('groupsUnder3Rooms').value)||0; const childrenOver3 = parseInt(document.getElementById('childrenOver3Rooms').value)||0; const groupsOver3 = parseInt(document.getElementById('groupsOver3Rooms').value)||0; if(schoolCap<=0 || kinderCap<=0){ showMessageRooms('⚠️ Введите мощность школы и детского сада', true); return; } html = renderVOKRooms(schoolCap, kinderCap, children1_4, children5_11, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3); }
-        document.getElementById('resultsRooms').innerHTML = html;
-    }
-    function resetFormRooms() { document.getElementById('objectTypeRooms').value='school'; document.getElementById('schoolCapacityRooms').value=''; document.getElementById('kindergartenCapacityRooms').value=''; document.getElementById('children1_4Rooms').value='0'; document.getElementById('children5_11Rooms').value='0'; document.getElementById('childrenUnder3Rooms').value='0'; document.getElementById('groupsUnder3Rooms').value='0'; document.getElementById('childrenOver3Rooms').value='0'; document.getElementById('groupsOver3Rooms').value='0'; document.getElementById('resultsRooms').innerHTML=''; document.getElementById('totalAreaValueRooms').innerHTML='0 м²'; document.getElementById('areaNoteRooms').innerHTML='по представленным помещениям'; toggleBlocksRooms(); showMessageRooms('✅ Параметры сброшены', false); }
-    function downloadWordRooms() { const resultsDiv = document.getElementById('resultsRooms'); if(!resultsDiv.innerHTML || resultsDiv.innerHTML===''){ showMessageRooms('⚠️ Сначала выполните расчёт', true); return; } const type = document.getElementById('objectTypeRooms').value; const typeName = type==='school'?'Школа':(type==='kindergarten'?'Детский сад':'ВОК'); const content = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Расчёт помещений ${typeName}</title><style>body{font-family:Arial;margin:40px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;background:#fff;}</style></head><body><h1>Расчёт помещений ${typeName}</h1>${resultsDiv.innerHTML}</body></html>`; const blob = new Blob([content], { type: 'application/msword' }); const link = document.createElement('a'); const url = URL.createObjectURL(blob); link.href = url; link.download = `помещения_${typeName}_${new Date().toISOString().slice(0,10)}.doc`; document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url); showMessageRooms('✅ Файл Word скачан', false); }
-    function showMessageRooms(msg, isError) { const resultsDiv = document.getElementById('resultsRooms'); const div = document.createElement('div'); div.className='temp-message'; div.style.background=isError?'#f8d7da':'#d4edda'; div.style.color=isError?'#721c24':'#155724'; div.innerHTML=msg; resultsDiv.insertBefore(div, resultsDiv.firstChild); setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); },3000); }
-    function toggleBlocksRooms() { const type = document.getElementById('objectTypeRooms').value; document.getElementById('schoolCapacityBlockRooms').classList.toggle('hidden', type!=='school' && type!=='vok'); document.getElementById('kindergartenCapacityBlockRooms').classList.toggle('hidden', type!=='kindergarten' && type!=='vok'); document.getElementById('schoolChildrenBlockRooms').classList.toggle('hidden', type!=='school' && type!=='vok'); document.getElementById('groupsBlockRooms').classList.toggle('hidden', type!=='kindergarten' && type!=='vok'); }
-    document.getElementById('objectTypeRooms').addEventListener('change', toggleBlocksRooms);
-    document.getElementById('calcBtnRooms').addEventListener('click', calculateRooms);
-    document.getElementById('resetBtnRooms').addEventListener('click', resetFormRooms);
-    document.getElementById('downloadWordBtnRooms').addEventListener('click', downloadWordRooms);
-    toggleBlocksRooms();
+    (function() {
+        const schoolTypicalDataRooms = { 275:{children1_4:100,children5_11:175},550:{children1_4:200,children5_11:350},825:{children1_4:300,children5_11:525},1100:{children1_4:400,children5_11:700},1375:{children1_4:500,children5_11:875},1650:{children1_4:600,children5_11:1050},1925:{children1_4:700,children5_11:1225},2200:{children1_4:800,children5_11:1400},2475:{children1_4:900,children5_11:1575},2750:{children1_4:1000,children5_11:1750},3025:{children1_4:1100,children5_11:1925} };
+        const kindergartenTypicalDataRooms = { 100:{groupsUnder3:1,childrenUnder3:20,groupsOver3:4,childrenOver3:80},125:{groupsUnder3:1,childrenUnder3:25,groupsOver3:4,childrenOver3:100},150:{groupsUnder3:1,childrenUnder3:25,groupsOver3:4,childrenOver3:125},175:{groupsUnder3:1,childrenUnder3:25,groupsOver3:6,childrenOver3:150},200:{groupsUnder3:1,childrenUnder3:25,groupsOver3:7,childrenOver3:175},225:{groupsUnder3:1,childrenUnder3:25,groupsOver3:8,childrenOver3:200},250:{groupsUnder3:2,childrenUnder3:50,groupsOver3:8,childrenOver3:200},275:{groupsUnder3:2,childrenUnder3:50,groupsOver3:9,childrenOver3:225},300:{groupsUnder3:2,childrenUnder3:50,groupsOver3:10,childrenOver3:250},325:{groupsUnder3:2,childrenUnder3:50,groupsOver3:11,childrenOver3:275},350:{groupsUnder3:2,childrenUnder3:50,groupsOver3:12,childrenOver3:300},375:{groupsUnder3:3,childrenUnder3:75,groupsOver3:12,childrenOver3:300},400:{groupsUnder3:2,childrenUnder3:50,groupsOver3:14,childrenOver3:350} };
+        let schoolCapacityRooms, kindergartenCapacityRooms;
+        function createSchoolSelectRooms(containerId, onChangeCallback) {
+            const select = document.createElement('select');
+            select.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            [275,550,825,1100,1375,1650,1925,2200,2475,2750,3025].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; select.appendChild(o); });
+            if(onChangeCallback) select.addEventListener('change', onChangeCallback);
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(select);
+            return select;
+        }
+        function createSchoolInputRooms(containerId) {
+            const input = document.createElement('input');
+            input.type = 'number'; input.placeholder = 'Введите количество мест'; input.step = '1';
+            input.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(input);
+            return input;
+        }
+        function createKindergartenSelectRooms(containerId, onChangeCallback) {
+            const select = document.createElement('select');
+            select.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            [100,125,150,175,200,225,250,275,300,325,350,375,400].forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; select.appendChild(o); });
+            if(onChangeCallback) select.addEventListener('change', onChangeCallback);
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(select);
+            return select;
+        }
+        function createKindergartenInputRooms(containerId) {
+            const input = document.createElement('input');
+            input.type = 'number'; input.placeholder = 'Введите количество мест'; input.step = '1';
+            input.style.cssText = 'width:100%; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:16px;';
+            document.getElementById(containerId).innerHTML = ''; document.getElementById(containerId).appendChild(input);
+            return input;
+        }
+        function rebuildSchoolControlRooms() {
+            const isTypical = document.getElementById('typicalObjectToggleRooms').checked;
+            if (isTypical) {
+                schoolCapacityRooms = createSchoolSelectRooms('schoolCapacityControlRooms', () => {
+                    const val = parseInt(schoolCapacityRooms.value);
+                    if (schoolTypicalDataRooms[val]) {
+                        document.getElementById('children1_4Rooms').value = schoolTypicalDataRooms[val].children1_4;
+                        document.getElementById('children5_11Rooms').value = schoolTypicalDataRooms[val].children5_11;
+                    }
+                });
+            } else {
+                schoolCapacityRooms = createSchoolInputRooms('schoolCapacityControlRooms');
+            }
+        }
+        function rebuildKindergartenControlRooms() {
+            const isTypical = document.getElementById('typicalObjectToggleRooms').checked;
+            if (isTypical) {
+                kindergartenCapacityRooms = createKindergartenSelectRooms('kindergartenCapacityControlRooms', () => {
+                    const val = parseInt(kindergartenCapacityRooms.value);
+                    if (kindergartenTypicalDataRooms[val]) {
+                        document.getElementById('groupsUnder3Rooms').value = kindergartenTypicalDataRooms[val].groupsUnder3;
+                        document.getElementById('childrenUnder3Rooms').value = kindergartenTypicalDataRooms[val].childrenUnder3;
+                        document.getElementById('groupsOver3Rooms').value = kindergartenTypicalDataRooms[val].groupsOver3;
+                        document.getElementById('childrenOver3Rooms').value = kindergartenTypicalDataRooms[val].childrenOver3;
+                    }
+                });
+            } else {
+                kindergartenCapacityRooms = createKindergartenInputRooms('kindergartenCapacityControlRooms');
+            }
+        }
+        function toggleBlocksRooms() {
+            const type = document.getElementById('objectTypeRooms').value;
+            document.getElementById('schoolCapacityBlockRooms').classList.toggle('hidden', type !== 'school' && type !== 'vok');
+            document.getElementById('kindergartenCapacityBlockRooms').classList.toggle('hidden', type !== 'kindergarten' && type !== 'vok');
+            document.getElementById('schoolChildrenBlockRooms').classList.toggle('hidden', type !== 'school' && type !== 'vok');
+            document.getElementById('groupsBlockRooms').classList.toggle('hidden', type !== 'kindergarten' && type !== 'vok');
+            if (type === 'school' || type === 'vok') rebuildSchoolControlRooms();
+            if (type === 'kindergarten' || type === 'vok') rebuildKindergartenControlRooms();
+        }
+        function getClassesFromChildrenRooms(children) { return Math.ceil(children / 25); }
+        function getSchoolRoomsRooms(capacity, children1_4, children5_11) {
+            const classes1_4 = getClassesFromChildrenRooms(children1_4);
+            const classes5_11 = getClassesFromChildrenRooms(children5_11);
+            let оснКабинетыНач = classes1_4; let площадьОснКабНач = 64.5; let кабинетМузыкиНач = 1; let площадьМузыкиНач = 64.5; let спортзалНач = 1; let площадьСпортзалаНач = 24*12;
+            let кабФизики = capacity < 725 ? 1 : (capacity < 1275 ? 2 : (capacity < 1825 ? 3 : (capacity < 2375 ? 4 : (capacity < 2925 ? 5 : 6))));
+            let кабБиологии = кабФизики; let кабХимии = кабФизики;
+            let кабИноЯз = capacity < 450 ? 2 : (capacity < 725 ? 4 : (capacity < 1550 ? 4 : (capacity < 2100 ? 8 : (capacity < 2750 ? 12 : 14))));
+            let кабИнформатики = capacity < 725 ? 2 : (capacity < 1275 ? 2 : (capacity < 1825 ? 4 : (capacity < 2375 ? 6 : (capacity < 2925 ? 8 : 10))));
+            let мастерские = capacity < 2350 ? 1 : 2; let кабинетМузыкиОсн = capacity >= 700 ? 1 : 0;
+            let площадьСпецКаб = 64.5; let площадьИнформатики = 13*4.5; let площадьМастерской = 13*9; let площадьКулинарии = 13*6; let площадьТкани = 13*6;
+            let оснКабинетыОсн = Math.max(0, classes5_11 - (кабФизики+кабБиологии+кабХимии+кабИноЯз+кабИнформатики+мастерские*3+кабинетМузыкиОсн));
+            let площадьОснКабОсн = 64.5;
+            let лаборантские = Math.round(кабФизики/2)+Math.round(кабБиологии/2)+кабХимии; let площадьЛаборантской = 18;
+            let инструментальная = мастерские; let площадьИнструментальной = 15;
+            let спортзал1 = capacity < 350 ? "24x12" : "30x18"; let площадьСпортзала1 = спортзал1==="24x12"?288:540;
+            let спортзал2 = capacity < 1275 ? 0 : (capacity < 1550 ? "24x12" : (capacity < 2100 ? "24x12" : "30x18"));
+            let площадьСпортзала2 = спортзал2==="24x12"?288:(спортзал2==="30x18"?540:0);
+            let обеденныйЗал = Math.ceil(capacity/2); let площадьОбеденногоЗала = обеденныйЗал*0.7;
+            let актовыйЗал = Math.ceil((children1_4+children5_11)/2); let площадьАктовогоЗала = актовыйЗал*0.65+70+20+10+10;
+            let библиотекаМест = Math.ceil(capacity*0.1); let itЗонаМест = Math.ceil(библиотекаМест*0.3);
+            let площадьБиблиотеки = capacity < 725 ? (библиотекаМест*0.7*2.4+64.5+(библиотекаМест*0.3*4.5)) : ((библиотекаМест-50)*2.4+64.5+112.5+87.5);
+            let медблок = 95;
+            let общаяПлощадь = (оснКабинетыНач*площадьОснКабНач)+(кабинетМузыкиНач*площадьМузыкиНач)+площадьСпортзалаНач+(оснКабинетыОсн*площадьОснКабОсн)+(кабФизики+кабБиологии+кабХимии+кабИноЯз)*площадьСпецКаб+кабИнформатики*площадьИнформатики+мастерские*площадьМастерской+мастерские*площадьКулинарии+мастерские*площадьТкани+(кабинетМузыкиОсн*площадьМузыкиНач)+лаборантские*площадьЛаборантской+инструментальная*площадьИнструментальной+площадьСпортзала1+площадьСпортзала2+площадьОбеденногоЗала+площадьАктовогоЗала+площадьБиблиотеки+медблок;
+            return { total: общаяПлощадь, details: { оснКабинетыНач, кабинетМузыкиНач, спортзалНач, оснКабинетыОсн, кабФизики, кабБиологии, кабХимии, кабИноЯз, кабИнформатики, мастерские, кабинетМузыкиОсн, лаборантские, инструментальная, спортзал1, спортзал2, обеденныйЗал, актовыйЗал, библиотекаМест, itЗонаМест, медблок } };
+        }
+        function getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, totalCapacity) {
+            let игроваяПлощадьUnder=0, игроваяПлощадьOver=0; if(childrenUnder3>0) игроваяПлощадьUnder = (childrenUnder3*2.5)+(groupsUnder3*2); if(childrenOver3>0) игроваяПлощадьOver = (childrenOver3*2.0)+(groupsOver3*2);
+            let спальняПлощадьUnder=0, спальняПлощадьOver=0; if(childrenUnder3>0) спальняПлощадьUnder = childrenUnder3*1.8; if(childrenOver3>0) спальняПлощадьOver = childrenOver3*2.0;
+            let музыкальныйЗал = totalCapacity<121?0:(totalCapacity<251?50:100); let спортивныйЗал = totalCapacity<121?0:(totalCapacity<250?75:100); let спортивноМузыкальный = totalCapacity<121?75:0;
+            let общаяПлощадь = игроваяПлощадьUnder+игроваяПлощадьOver+спальняПлощадьUnder+спальняПлощадьOver+музыкальныйЗал+спортивныйЗал+спортивноМузыкальный;
+            return { total: общаяПлощадь, details: { groupsUnder3, childrenUnder3, groupsOver3, childrenOver3, игроваяПлощадьUnder, игроваяПлощадьOver, спальняПлощадьUnder, спальняПлощадьOver, музыкальныйЗал, спортивныйЗал, спортивноМузыкальный } };
+        }
+        function renderSchoolRooms(capacity, children1_4, children5_11) {
+            const rooms = getSchoolRoomsRooms(capacity, children1_4, children5_11); const d = rooms.details;
+            let html = `<div class="result-card"><h3>🏫 Школа на ${capacity} мест</h3></div><div class="section-title">📚 Начальная школа (1–4 классы)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th></tr><tr><td>Основные кабинеты</td><td>${d.оснКабинетыНач}</td><td>${(d.оснКабинетыНач*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет музыки</td><td>${d.кабинетМузыкиНач}</td><td>${(d.кабинетМузыкиНач*64.5).toFixed(1)}</td></tr>
+            <tr><td>Спортивный зал (24×12)</td><td>${d.спортзалНач}</td><td>288.0</td></tr></table>`;
+            html+=`<div class="section-title">📚 Основная и старшая школа (5–11 классы)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th></tr>`;
+            html+=`<tr><td>Основные кабинеты</td><td>${d.оснКабинетыОсн}</td><td>${(d.оснКабинетыОсн*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет физики</td><td>${d.кабФизики}</td><td>${(d.кабФизики*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет биологии</td><td>${d.кабБиологии}</td><td>${(d.кабБиологии*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет химии</td><td>${d.кабХимии}</td><td>${(d.кабХимии*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет иностранного языка</td><td>${d.кабИноЯз}</td><td>${(d.кабИноЯз*64.5).toFixed(1)}</td></tr>
+            <tr><td>Кабинет информатики</td><td>${d.кабИнформатики}</td><td>${(d.кабИнформатики*58.5).toFixed(1)}</td></tr>
+            <tr><td>Мастерские (металл/дерево)</td><td>${d.мастерские}</td><td>${(d.мастерские*117).toFixed(1)}</td></tr>
+            <tr><td>Кабинет кулинарии</td><td>${d.мастерские}</td><td>${(d.мастерские*78).toFixed(1)}</td></tr>
+            <tr><td>Кабинет обработки ткани</td><td>${d.мастерские}</td><td>${(d.мастерские*78).toFixed(1)}</td></tr>`;
+            if(d.кабинетМузыкиОсн>0) html+=`<tr><td>Кабинет музыки (старшие классы)</td><td>${d.кабинетМузыкиОсн}</td><td>${(d.кабинетМузыкиОсн*64.5).toFixed(1)}</td></tr>`;
+            html+=`</table><div class="section-title">🏆 Спортивный блок</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th></tr>`;
+            html+=`<tr><td>Спортивный зал (основной)</td><td>1</td><td>${d.спортзал1==="24x12"?288:540}</td></tr>`;
+            if(d.спортзал2>0) html+=`<tr><td>Спортивный зал (второй)</td><td>1</td><td>288.0</td></tr>`;
+            html+=`</table><div class="subsection-title">🔬 Лаборантские и вспомогательные</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Площадь (м²)</th></tr>`;
+            html+=`<tr><td>Лаборантские</td><td>${d.лаборантские}</td><td>${(d.лаборантские*18).toFixed(1)}</td></tr>
+            <tr><td>Инструментальная</td><td>${d.инструментальная}</td><td>${(d.инструментальная*15).toFixed(1)}</td></tr>`;
+            html+=`<tr><div class="section-title">🏛️ Общешкольные помещения</div><table class="result-table">`;
+            html+=`<tr><td>Обеденный зал</td><td>${d.обеденныйЗал} посадочных мест</td><td>${(d.обеденныйЗал*0.7).toFixed(1)}</td></tr>
+            <tr><td>Актовый зал</td><td>${d.актовыйЗал} посадочных мест</td><td>${(d.актовыйЗал*0.65+70+20+10+10).toFixed(1)}</td></tr>
+            <tr><td>Библиотека (10% от мощности)</td><td>${d.библиотекаМест} мест<br>IT-зона не менее ${d.itЗонаМест} мест</td><td>${capacity<725?(d.библиотекаМест*0.7*2.4+64.5+(d.библиотекаМест*0.3*4.5)).toFixed(1):((d.библиотекаМест-50)*2.4+64.5+112.5+87.5).toFixed(1)}</td></tr>
+            <tr><td>Медицинский блок</td><td>комплекс</td><td>95.0</td></tr>
+            </table>`;
+            document.getElementById('totalAreaValueRooms').innerHTML = `${rooms.total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `по всем представленным помещениям школы`; return html;
+        }
+        function renderKindergartenRooms(capacity, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3) {
+            const rooms = getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, capacity); const d = rooms.details;
+            let html = `<div class="result-card"><h3>🏫 Детский сад на ${capacity} мест</h3></div><div class="section-title">👶 Групповые помещения (до 3 лет)</div><table class="result-table"><tr><th>Наименование</th><th>Кол-во</th><th>Норматив</th><th>Общая площадь (м²)</th></tr>`;
+            if(childrenUnder3>0){ html+=`<tr><td>Игровые комнаты</td><td>${groupsUnder3}</td><td>2,5 м²/реб + 2 м² на группу (мебель)</td><td>${d.игроваяПлощадьUnder.toFixed(1)}</td></tr>
+            <tr><td>Спальни</td><td>${groupsUnder3}</td><td>1,8 м²/реб</td><td>${d.спальняПлощадьUnder.toFixed(1)}</td></tr>`; } else { html+=`<tr><td colspan="4">Нет детей до 3 лет</td></tr>`; }
+            html+=`</table><div class="section-title">👧 Групповые помещения (от 3 до 7 лет)</div><table class="result-table">`;
+            if(childrenOver3>0){ html+=`<tr><td>Игровые комнаты</td><td>${groupsOver3}</td><td>2,0 м²/реб + 2 м² на группу (мебель)</td><td>${d.игроваяПлощадьOver.toFixed(1)}</td></tr>
+            <tr><td>Спальни</td><td>${groupsOver3}</td><td>2,0 м²/реб</td><td>${d.спальняПлощадьOver.toFixed(1)}</td></tr>`; } else { html+=`<tr><td colspan="4">Нет детей от 3 до 7 лет</td></tr>`; }
+            html+=`</table><div class="section-title">🏃 Спортивно-музыкальные помещения</div><table class="result-table">`;
+            if(d.музыкальныйЗал>0) html+=`<tr><td>Музыкальный зал</td><td>${d.музыкальныйЗал}</td></tr>`;
+            if(d.спортивныйЗал>0) html+=`<tr><td>Спортивный зал</td><td>${d.спортивныйЗал}</td></tr>`;
+            if(d.спортивноМузыкальный>0) html+=`<tr><td>Спортивно-музыкальный зал</td><td>${d.спортивноМузыкальный}</td></tr>`;
+            if(d.музыкальныйЗал===0 && d.спортивныйЗал===0 && d.спортивноМузыкальный===0) html+=`<tr><td colspan="2">Не предусмотрены (мощность менее 120 мест)</td></tr>`;
+            html+=`</table>`;
+            document.getElementById('totalAreaValueRooms').innerHTML = `${rooms.total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `по всем представленным помещениям сада`; return html;
+        }
+        function renderVOKRooms(schoolCap, kinderCap, children1_4, children5_11, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3) {
+            const school = getSchoolRoomsRooms(schoolCap, children1_4, children5_11); const kinder = getKindergartenRoomsRooms(childrenUnder3, groupsUnder3, childrenOver3, groupsOver3, kinderCap); const total = school.total + kinder.total;
+            let html = `<div class="result-card"><h3>🏛️ ВОК (школа + детский сад)</h3></div><div class="section-title">🏫 Школa (${schoolCap} мест)</div><table class="result-table"><tr><th>Показатель</th><th>Значение</th></tr><td>Общая площадь помещений школы</td><td><strong>${school.total.toFixed(1)} м²</strong></td></tr></table><div class="section-title">🏫 Детский сад (${kinderCap} мест)</div><table class="result-table"><tr><th>Показатель</th><th>Значение</th><tr><td>Общая площадь помещений сада</td><td><strong>${kinder.total.toFixed(1)} м²</strong></td></tr></table><div class="total-card"><div class="total-value">${total.toFixed(1)} м²</div><div>ИТОГО по ВОК (школа + сад)</div></div>`;
+            document.getElementById('totalAreaValueRooms').innerHTML = `${total.toFixed(1)} м²`; document.getElementById('areaNoteRooms').innerHTML = `суммарная площадь школы и сада`; return html;
+        }
+        function calculateRooms() {
+            const type = document.getElementById('objectTypeRooms').value; let html='';
+            if(type==='school'){
+                const capacity = schoolCapacityRooms ? (parseInt(schoolCapacityRooms.value)||0) : 0;
+                const children1_4 = parseInt(document.getElementById('children1_4Rooms').value)||0;
+                const children5_11 = parseInt(document.getElementById('children5_11Rooms').value)||0;
+                if(capacity<=0){ showMessageRooms('⚠️ Введите мощность школы', true); return; }
+                html = renderSchoolRooms(capacity, children1_4, children5_11);
+            } else if(type==='kindergarten'){
+                const childrenUnder3 = parseInt(document.getElementById('childrenUnder3Rooms').value)||0;
+                const groupsUnder3 = parseInt(document.getElementById('groupsUnder3Rooms').value)||0;
+                const childrenOver3 = parseInt(document.getElementById('childrenOver3Rooms').value)||0;
+                const groupsOver3 = parseInt(document.getElementById('groupsOver3Rooms').value)||0;
+                const capacity = childrenUnder3+childrenOver3;
+                if(capacity<=0){ showMessageRooms('⚠️ Введите количество детей', true); return; }
+                html = renderKindergartenRooms(capacity, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3);
+            } else {
+                const schoolCap = schoolCapacityRooms ? (parseInt(schoolCapacityRooms.value)||0) : 0;
+                const kinderCap = kindergartenCapacityRooms ? (parseInt(kindergartenCapacityRooms.value)||0) : 0;
+                const children1_4 = parseInt(document.getElementById('children1_4Rooms').value)||0;
+                const children5_11 = parseInt(document.getElementById('children5_11Rooms').value)||0;
+                const childrenUnder3 = parseInt(document.getElementById('childrenUnder3Rooms').value)||0;
+                const groupsUnder3 = parseInt(document.getElementById('groupsUnder3Rooms').value)||0;
+                const childrenOver3 = parseInt(document.getElementById('childrenOver3Rooms').value)||0;
+                const groupsOver3 = parseInt(document.getElementById('groupsOver3Rooms').value)||0;
+                if(schoolCap<=0 || kinderCap<=0){ showMessageRooms('⚠️ Введите мощность школы и детского сада', true); return; }
+                html = renderVOKRooms(schoolCap, kinderCap, children1_4, children5_11, childrenUnder3, groupsUnder3, childrenOver3, groupsOver3);
+            }
+            document.getElementById('resultsRooms').innerHTML = html;
+        }
+        function resetFormRooms() {
+            document.getElementById('objectTypeRooms').value='school';
+            document.getElementById('typicalObjectToggleRooms').checked=true;
+            document.getElementById('children1_4Rooms').value='0';
+            document.getElementById('children5_11Rooms').value='0';
+            document.getElementById('childrenUnder3Rooms').value='0';
+            document.getElementById('groupsUnder3Rooms').value='0';
+            document.getElementById('childrenOver3Rooms').value='0';
+            document.getElementById('groupsOver3Rooms').value='0';
+            document.getElementById('resultsRooms').innerHTML='';
+            document.getElementById('totalAreaValueRooms').innerHTML='0 м²';
+            document.getElementById('areaNoteRooms').innerHTML='по представленным помещениям';
+            toggleBlocksRooms();
+            showMessageRooms('✅ Параметры сброшены', false);
+        }
+        function downloadWordRooms() {
+            const resultsDiv = document.getElementById('resultsRooms');
+            if(!resultsDiv.innerHTML || resultsDiv.innerHTML===''){ showMessageRooms('⚠️ Сначала выполните расчёт', true); return; }
+            const type = document.getElementById('objectTypeRooms').value;
+            const typeName = type==='school'?'Школа':(type==='kindergarten'?'Детский сад':'ВОК');
+            const content = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Расчёт помещений ${typeName}</title><style>body{font-family:Arial;margin:40px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ddd;padding:8px;background:#fff;}</style></head><body><h1>Расчёт помещений ${typeName}</h1>${resultsDiv.innerHTML}</body></html>`;
+            const blob = new Blob([content], { type: 'application/msword' });
+            const link = document.createElement('a'); const url = URL.createObjectURL(blob);
+            link.href = url; link.download = `помещения_${typeName}_${new Date().toISOString().slice(0,10)}.doc`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+            showMessageRooms('✅ Файл Word скачан', false);
+        }
+        function showMessageRooms(msg, isError) {
+            const resultsDiv = document.getElementById('resultsRooms');
+            const div = document.createElement('div'); div.className='temp-message';
+            div.style.background=isError?'#f8d7da':'#d4edda'; div.style.color=isError?'#721c24':'#155724';
+            div.innerHTML=msg; resultsDiv.insertBefore(div, resultsDiv.firstChild);
+            setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); },3000);
+        }
+        document.getElementById('objectTypeRooms').addEventListener('change', toggleBlocksRooms);
+        document.getElementById('calcBtnRooms').addEventListener('click', calculateRooms);
+        document.getElementById('resetBtnRooms').addEventListener('click', resetFormRooms);
+        document.getElementById('downloadWordBtnRooms').addEventListener('click', downloadWordRooms);
+        document.getElementById('typicalObjectToggleRooms').addEventListener('change', () => { toggleBlocksRooms(); });
+        toggleBlocksRooms();
+    })();
 </script>
 
 </body>
